@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_project"]=self["webpackChunkvue_project"]||[]).push([[964],{3964:function(n,e,u){u.r(e),u.d(e,{default:function(){return p}});var r=u(3396);function t(n,e,u,t,c,o){return(0,r.wg)(),(0,r.iD)("div",null," coupons ")}var c={components:{}},o=u(89);const s=(0,o.Z)(c,[["render",t]]);var p=s}}]);
+//# sourceMappingURL=964.f3dea0ad.js.map
