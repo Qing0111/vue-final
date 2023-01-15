@@ -25,7 +25,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            @click="$emit('del-product', tempProduct)"
+            @click="$emit('del-item', tempItem)"
           >
             Save changes
           </button>
@@ -44,13 +44,13 @@ export default {
   },
   watch: {
     item() {
-      this.tempProduct = this.item;
+      this.tempItem = this.item;
     }
   },
   data() {
     return {
       modal: "",
-      tempProduct: {},
+      tempItem: {},
     };
   },
   mixins: [modalMixin],

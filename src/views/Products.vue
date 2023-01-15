@@ -54,7 +54,7 @@
   <DelModal
     ref="DelModal"
     :item="tempProduct"
-    @del-product="delProduct"
+    @del-item="delProduct"
   ></DelModal>
 </template>
 
@@ -96,9 +96,9 @@ export default {
       this.tempProduct = { ...item };
       this.$refs.DelModal.showModal();
     },
-    delProduct(item) {
-      // console.log(item.id);
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`;
+    delProduct() {
+      console.log(this.tempProduct);
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
       this.isLoading = true;
       this.$http.delete(api).then((res) => {
         this.isLoading = false;

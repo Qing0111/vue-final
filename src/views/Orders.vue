@@ -95,11 +95,11 @@ export default {
       this.currentPage = currentPage;
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}`;
       this.isLoading = true;
-      this.$http.get(url, this.tempProduct).then((response) => {
-        this.orders = response.data.orders;
-        this.pagination = response.data.pagination;
+      this.$http.get(url, this.tempProduct).then((res) => {
+        this.orders = res.data.orders;
+        this.pagination = res.data.pagination;
         this.isLoading = false;
-        console.log(response);
+        console.log(res);
       });
     },
     openModal(isNew, item) {
@@ -119,17 +119,17 @@ export default {
       const paid = {
         is_paid: item.is_paid,
       };
-      this.$http.put(api, { data: paid }).then((response) => {
+      this.$http.put(api, { data: paid }).then((res) => {
         this.isLoading = false;
         this.getOrders(this.currentPage);
-        this.$httpMessageState(response, "更新付款狀態");
+        this.$httpMessageState(res, "更新付款狀態");
       });
     },
     delOrder() {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`;
       this.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        console.log(response);
+      this.$http.delete(url).then((res) => {
+        console.log(res);
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();
         this.getOrders(this.currentPage);
