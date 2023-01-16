@@ -1,70 +1,81 @@
 <template>
-  <Loading :active="isLoading"></Loading>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand">後台管理</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <nav class="navbar-nav">
-          <router-link to="/dashboard/products" class="nav-link"
-            >產品</router-link
-          >
-          <router-link to="/dashboard/orders" class="nav-link"
-            >訂單</router-link
-          >
-          <router-link to="/dashboard/coupons" class="nav-link"
-            >優惠券</router-link
-          >
-          <a class="nav-link" href="#" @click.prevent="logout">登出</a>
-        </nav>
-      </div>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#/">首頁</a></li>
+        <li><a href="#">關於我們</a></li>
+        <li><a href="#/productList">商品</a></li>
+      </ul>
+    </nav>
+    <div class="logo">
+      <h1><a href="#/" id="">rabbit family</a></h1>
     </div>
-  </nav>
+    <ul class="collect-shop">
+      <li>
+        <a href="#"><i class="bi bi-suit-heart"></i></a>
+      </li>
+      <li>
+        <a href="#/"><i class="bi bi-cart3"></i></a>
+      </li>
+    </ul>
+  </header>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isLoading: false,
-    };
-  },
-  methods: {
-    logout() {
-      const api = `${process.env.VUE_APP_API}/logout`;
-      // console.log(this.user);
-      // fetch(api, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(this.user),
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) => {
-      //     if (res.success) {
-      //       this.$router.push("/login");
-      //     }
-      //   });
-      this.isLoading = true;
-      this.$http.post(api, this.user).then((res) => {
-        this.isLoading = false;
-        console.log(res);
-        if (res.data.success) {
-          this.$router.push("/login");
-        }
-      });
-    },
-  },
-};
-</script>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 5%;
+  background-color: burlywood;
+  height: 60px;
+  nav {
+    height: 100%;
+    ul {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      a {
+        display: inline-block;
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  }
+  .logo {
+    height: 100%;
+    h1 {
+      height: 100%;
+      font-size: 36px;
+      line-height: 52px;
+      a {
+        font-family: "Kalam", cursive;
+        display: inline-block;
+        height: 100%;
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  }
+  .collect-shop {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      i {
+        font-size: 24px;
+      }
+    }
+  }
+}
+</style>
+
+<script></script>

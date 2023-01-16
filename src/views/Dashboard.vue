@@ -1,5 +1,5 @@
 <template>
-  <Navbar></Navbar>
+  <NavbarBack></NavbarBack>
   <div class="container-fluid mt-3 position-relative">
     <ToastMessages></ToastMessages>
     <router-view />
@@ -9,11 +9,11 @@
 <script>
 import emitter from "@/methods/emitter";
 import ToastMessages from "@/components/ToastMessages.vue";
-import Navbar from "../components/Navbar.vue";
+import NavbarBack from "../components/NavbarBack.vue";
 
 export default {
   components: {
-    Navbar,
+    NavbarBack,
     ToastMessages,
   },
   provide() {

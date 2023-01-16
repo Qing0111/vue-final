@@ -39,6 +39,10 @@ const routes = [
     ],
   },
   {
+    path: "/productList",
+    component: () => import("../views/ProductList.vue"),
+  },
+  {
     path: "/user",
     component: () => import("../views/Userboard.vue"),
     children: [
