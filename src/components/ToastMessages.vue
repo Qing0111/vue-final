@@ -6,22 +6,30 @@
 
 <script>
 import Toast from "@/components/Toast.vue";
+import { mapState, mapActions } from "pinia";
+import statusStore from "@/stores/statusStore";
 
 export default {
   components: {
     Toast,
   },
-  data() {
-    return {
-      messages: [],
-    };
+  computed: {
+    ...mapState(statusStore, ["messages"]),
   },
-  inject: ["emitter"],
-  mounted() {
-    this.emitter.on("push-message", (message) => {
-      const { style = "success", title, content } = message;
-      this.messages.push({ style, title, content });
-    });
+  methods: {
+    ...mapActions(statusStore, ["pushMessage"]),
   },
+  // data() {
+  //   return {
+  //     messages: [],
+  //   };
+  // },
+  // inject: ["emitter"],
+  // mounted() {
+  //   this.emitter.on("push-message", (message) => {
+  //     const { style = "success", title, content } = message;
+  //     this.messages.push({ style, title, content });
+  //   });
+  // },
 };
 </script>

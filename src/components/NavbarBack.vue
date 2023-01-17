@@ -16,7 +16,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <nav class="navbar-nav">
-          <router-link to="/dashboard/products" class="nav-link"
+          <router-link to="/dashboard/productList" class="nav-link"
             >產品</router-link
           >
           <router-link to="/dashboard/orders" class="nav-link"

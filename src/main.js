@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import { createPinia } from "pinia";
 import VueAxios from "vue-axios";
 import axios from "axios";
 import Loading from "vue3-loading-overlay";
@@ -17,7 +18,7 @@ import App from "./App.vue";
 import router from "./router";
 import { currency, date } from "./methods/filter";
 import $httpMessageState from "./methods/pushMessageState";
-
+const pinia = createPinia();
 const app = createApp(App);
 app.config.globalProperties.$filters = {
   currency,
@@ -39,6 +40,7 @@ setLocale("zh_TW");
 app.config.globalProperties.$httpMessageState = $httpMessageState;
 app.use(VueAxios, axios);
 app.use(router);
+app.use(pinia);
 app.component("Loading", Loading);
 
 // 註冊 vee-validate 三個全域元件
