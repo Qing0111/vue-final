@@ -101,7 +101,7 @@ export default {
     ...mapActions(cartStore, ["addToCart", "getCart"]),
 
     getFavoriteProduct() {
-      if (this.favoriteItems.length) {
+      if (this.favoriteItems) {
         this.favoriteItems.forEach((item) => {
           const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${item}`;
           // console.log(url);
