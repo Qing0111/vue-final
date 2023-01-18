@@ -24,7 +24,7 @@ export default defineStore("cartStore", {
         status.cartLoading = "";
         // this.$httpMessageState(res, "加入購物車");
         status.pushMessage(res, { title: '加入購物車' })
-        console.log(res);
+        // console.log(res);
         this.getCart();
       });
     },
@@ -32,7 +32,7 @@ export default defineStore("cartStore", {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       status.isLoading = true;
       axios.get(url).then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         this.cart = res.data.data;
         status.isLoading = false;
       });

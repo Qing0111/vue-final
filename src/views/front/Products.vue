@@ -4,8 +4,9 @@
     <ToastMessages></ToastMessages>
     <router-view />
   </article>
-  <div class="container">
-    <main class="row">
+
+  <main class="container">
+    <div class="row">
       <aside class="col-md-2">
         <ul class="list">
           <li><a href="#">All</a></li>
@@ -20,7 +21,10 @@
             v-for="item in products"
             :key="item.id"
           >
-            <div class="card position-relative">
+            <article
+              class="card position-relative"
+              
+            >
               <img
                 :src="item.imageUrl"
                 class="card-img-top"
@@ -49,11 +53,7 @@
                   原價 {{ item.origin_price }} 元
                 </p>
                 <div class="btn-group btn-group-sm w-100">
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary"
-                    @click="getProduct(item.id)"
-                  >
+                  <button type="button" class="btn btn-outline-secondary" @click="getProduct(item.id)">
                     查看更多
                   </button>
                   <button
@@ -72,12 +72,14 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         </div>
       </section>
-    </main>
-  </div>
+    </div>
+  </main>
+
+  <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
 </template>
 
 <style lang="scss">
@@ -93,6 +95,7 @@
 .heart {
   left: 90%;
   top: 5px;
+  z-index: 1;
   i {
     font-size: 24px;
   }
@@ -107,10 +110,12 @@ import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
 import localFavorite from "@/mixins/localFavorite";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
   components: {
     ToastMessages,
+    Pagination,
   },
   mixins: [localFavorite],
   provide() {
@@ -122,6 +127,7 @@ export default {
     return {
       product: {},
       favoriteItems: [],
+
       // status: {
       //   loadingItem: "",
       // },
@@ -129,7 +135,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(productStore, ["products"]),
+    ...mapState(productStore, ["products", "pagination"]),
     ...mapState(cartStore, ["cart"]),
     ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
@@ -138,7 +144,7 @@ export default {
     ...mapActions(cartStore, ["addToCart", "getCart"]),
 
     getProduct(id) {
-      this.$router.push(`/user/product/${id}`);
+      this.$router.push(`/product/${id}`);
     },
     // addToCart(id) {
     //   console.log(id);
@@ -167,6 +173,7 @@ export default {
   },
   created() {
     this.getProducts();
+    this.getCart();
     this.getLocalFavorite();
   },
 };

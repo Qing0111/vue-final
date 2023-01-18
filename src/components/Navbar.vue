@@ -9,17 +9,23 @@
         </ul>
       </nav>
       <div class="logo">
-        <h1><a href="#/home" id="">rabbit family</a></h1>
+        <h1><a href="#/home" id="">RabbitFamily</a></h1>
       </div>
       <ul class="collect-shop">
         <li>
           <a href="#/login"><i class="bi bi-person"></i></a>
         </li>
-        <li>
+        <li class="itemLength">
           <a href="#/favorite"><i class="bi bi-suit-heart"></i></a>
+          <article class="bg-danger text-white" v-if="favoriteItems.length">
+            {{ favoriteItems.length }}
+          </article>
         </li>
-        <li>
+        <li class="itemLength">
           <a href="#/cart"><i class="bi bi-cart3"></i></a>
+          <article class="bg-danger text-white" v-if="cart.carts">
+            {{ cart.carts.length }}
+          </article>
         </li>
       </ul>
     </section>
@@ -80,9 +86,47 @@ header {
           font-size: 24px;
         }
       }
+      .itemLength {
+        position: relative;
+        article {
+          position: absolute;
+          top: -6px;
+          left: 60%;
+          width: 16px;
+          height: 16px;
+          text-align: center;
+          line-height: 16px;
+          border-radius: 50%;
+          font-size: 12px;
+        }
+      }
     }
   }
 }
 </style>
 
-<script></script>
+<script>
+import { mapState, mapActions } from "pinia";
+import cartStore from "@/stores/cartStore";
+import localFavorite from "@/mixins/localFavorite";
+import emitter from "@/methods/emitter";
+
+export default {
+  data() {
+    return {
+      favoriteItems: [],
+    };
+  },
+  mixins: [localFavorite],
+  computed: {
+    ...mapState(cartStore, ["cart"]),
+  },
+
+  created() {
+    this.getLocalFavorite();
+    emitter.on('updateFavorite', () => {
+      this.getLocalFavorite();
+    })
+  },
+};
+</script>

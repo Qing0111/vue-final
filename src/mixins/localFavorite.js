@@ -1,3 +1,6 @@
+import emitter from "@/methods/emitter";
+
+
 export default {
   methods: {
     toggleFavorite(itemId) {
@@ -7,6 +10,7 @@ export default {
         this.favoriteItems.push(itemId);
       }
       localStorage.setItem('favoriteItems', JSON.stringify(this.favoriteItems));
+      emitter.emit('updateFavorite');
     },
     getLocalFavorite() {
       this.favoriteItems = JSON.parse(localStorage.getItem("favoriteItems"));

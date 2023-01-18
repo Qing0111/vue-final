@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue_project"]=self["webpackChunkvue_project"]||[]).push([[957],{7957:function(e,n,o){o.r(n),o.d(n,{default:function(){return i}});var c=o(3396);const t={class:"home"};function r(e,n,o,r,s,u){return(0,c.wg)(),(0,c.iD)("div",t)}var s={name:"HomeView",components:{},created(){console.log("https://vue3-course-api.hexschool.io","qing-api")}},u=o(89);const a=(0,u.Z)(s,[["render",r]]);var i=a}}]);
-//# sourceMappingURL=957.0be2b5a3.js.map
