@@ -17,7 +17,7 @@
         </li>
         <li class="itemLength">
           <a href="#/favorite"><i class="bi bi-suit-heart"></i></a>
-          <article class="bg-danger text-white" v-if="favoriteItems.length">
+          <article class="bg-danger text-white" v-if="favoriteItems">
             {{ favoriteItems.length }}
           </article>
         </li>
