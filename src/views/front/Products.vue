@@ -21,10 +21,7 @@
             v-for="item in products"
             :key="item.id"
           >
-            <article
-              class="card position-relative"
-              
-            >
+            <article class="card position-relative">
               <img
                 :src="item.imageUrl"
                 class="card-img-top"
@@ -36,13 +33,10 @@
                 @click="toggleFavorite(item.id)"
               >
                 <i
-                  class="bi"
-                  :class="[
-                    favoriteItems.includes(item.id)
-                      ? 'bi-suit-heart-fill'
-                      : 'bi-suit-heart',
-                  ]"
+                  class="bi bi-suit-heart-fill"
+                  v-if="favoriteItems.includes(item.id)"
                 ></i>
+                <i class="bi bi-suit-heart" v-else></i>
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ item.title }}</h5>
@@ -53,7 +47,7 @@
                   原價 {{ item.origin_price }} 元
                 </p>
                 <div class="btn-group btn-group-sm w-100">
-                  <button type="button" class="btn btn-outline-secondary" @click="getProduct(item.id)">
+                  <button type="button" class="btn btn-outline-secondary">
                     查看更多
                   </button>
                   <button
