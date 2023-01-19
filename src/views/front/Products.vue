@@ -120,12 +120,7 @@ export default {
   data() {
     return {
       product: {},
-      favoriteItems: [],
-
-      // status: {
-      //   loadingItem: "",
-      // },
-      // cart: {},
+      favoriteItems: {},
     };
   },
   computed: {
@@ -140,30 +135,6 @@ export default {
     getProduct(id) {
       this.$router.push(`/product/${id}`);
     },
-    // addToCart(id) {
-    //   console.log(id);
-    //   this.cartLoading = id;
-    //   const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
-    //   const cart = {
-    //     product_id: id,
-    //     qty: 1,
-    //   };
-    //   this.$http.post(url, { data: cart }).then((res) => {
-    //     this.cartLoading = "";
-    //     this.$httpMessageState(res, "加入購物車");
-    //     console.log(res);
-    //     this.getCart();
-    //   });
-    // },
-    // getCart() {
-    //   const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
-    //   this.isLoading = true;
-    //   this.$http.get(url).then((res) => {
-    //     console.log(res.data.data);
-    //     this.cart = res.data.data;
-    //     this.isLoading = false;
-    //   });
-    // },
   },
   created() {
     this.getProducts();
