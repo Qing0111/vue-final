@@ -86,7 +86,7 @@ import localFavorite from "@/mixins/localFavorite";
 export default {
   data() {
     return {
-      favoriteItems: [],
+      favoriteItems: this.getLocalFavorite() || [],
       favoriteProduct: [],
     };
   },
@@ -121,7 +121,7 @@ export default {
   created() {
     // this.getProducts();
     this.getCart();
-    this.getLocalFavorite();
+    
     this.getFavoriteProduct();
   },
 };

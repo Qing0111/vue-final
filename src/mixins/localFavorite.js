@@ -13,7 +13,7 @@ export default {
       emitter.emit('updateFavorite');
     },
     getLocalFavorite() {
-      this.favoriteItems = JSON.parse(localStorage.getItem("favoriteItems"));
+      return JSON.parse(localStorage.getItem("favoriteItems"));
     }
   },
 };

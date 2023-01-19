@@ -31,7 +31,6 @@
               <div
                 class="heart position-absolute text-danger"
                 @click="toggleFavorite(item.id)"
-                v-if="products"
               >
                 <i
                   class="bi bi-suit-heart-fill"
@@ -121,7 +120,7 @@ export default {
   data() {
     return {
       product: {},
-      favoriteItems: {},
+      favoriteItems: this.getLocalFavorite() || [],
     };
   },
   computed: {
@@ -140,7 +139,6 @@ export default {
   created() {
     this.getProducts();
     this.getCart();
-    this.getLocalFavorite();
   },
 };
 </script>

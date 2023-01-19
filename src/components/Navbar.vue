@@ -114,7 +114,7 @@ import emitter from "@/methods/emitter";
 export default {
   data() {
     return {
-      favoriteItems: [],
+      favoriteItems: this.getLocalFavorite() || [],
     };
   },
   mixins: [localFavorite],
@@ -123,9 +123,9 @@ export default {
   },
 
   created() {
-    this.getLocalFavorite();
+    
     emitter.on('updateFavorite', () => {
-      this.getLocalFavorite();
+      this.favoriteItems = this.getLocalFavorite();
     })
   },
 };
