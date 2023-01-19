@@ -1,7 +1,7 @@
 <template>
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-      <li class="page-item" :class="{'disabled': pages.has_pre === false}">
+      <li class="page-item" :class="{ disabled: pages.has_pre === false }">
         <a
           class="page-link"
           href="#"
@@ -21,10 +21,7 @@
           page
         }}</a>
       </li>
-      <li
-        class="page-item"
-        :class="{'disabled': pages.has_next === false}"
-      >
+      <li class="page-item" :class="{ disabled: pages.has_next === false }">
         <a
           class="page-link"
           href="#"

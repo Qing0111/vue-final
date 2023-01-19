@@ -1,10 +1,12 @@
 <template>
   <header>
-    <section class="container">
+    <section class="discount">
+      <p>輸入優惠碼 : 52rabbit，可享有8折優惠</p>
+    </section>
+    <section class="container header">
       <nav>
         <ul>
           <li><a href="#/home">首頁</a></li>
-          <li><a href="#">關於我們</a></li>
           <li><a href="#/products">商品</a></li>
         </ul>
       </nav>
@@ -17,13 +19,13 @@
         </li>
         <li class="itemLength">
           <a href="#/favorite"><i class="bi bi-suit-heart"></i></a>
-          <article class="bg-danger text-white" v-if="favoriteItems">
+          <article class="text-white" v-if="favoriteItems">
             {{ favoriteItems.length }}
           </article>
         </li>
         <li class="itemLength">
           <a href="#/cart"><i class="bi bi-cart3"></i></a>
-          <article class="bg-danger text-white" v-if="cart.carts">
+          <article class="text-white" v-if="cart.carts">
             {{ cart.carts.length }}
           </article>
         </li>
@@ -36,11 +38,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
 
 header {
-  padding: 4px 0;
   width: 100%;
-  height: 60px;
-  background-color: burlywood;
-  section {
+  background-color: #54433c;
+  .discount {
+    background-color: #f9ba37;
+    padding: 4px 12px;
+    text-align: center;
+    p {
+      color: #54433c;
+      font-size: 14px;
+    }
+  }
+  .header {
+    padding: 4px 0;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +65,7 @@ header {
         a {
           display: inline-block;
           text-decoration: none;
-          color: #000;
+          color: #fff;
         }
       }
     }
@@ -69,7 +80,7 @@ header {
           display: inline-block;
           height: 100%;
           text-decoration: none;
-          color: #000;
+          color: #fff;
         }
       }
     }
@@ -81,7 +92,7 @@ header {
       a {
         display: inline-block;
         text-decoration: none;
-        color: #000;
+        color: #fff;
         i {
           font-size: 24px;
         }
@@ -98,6 +109,7 @@ header {
           line-height: 16px;
           border-radius: 50%;
           font-size: 12px;
+          background-color: #c8a472;
         }
       }
     }
@@ -123,10 +135,9 @@ export default {
   },
 
   created() {
-    
-    emitter.on('updateFavorite', () => {
+    emitter.on("updateFavorite", () => {
       this.favoriteItems = this.getLocalFavorite();
-    })
+    });
   },
 };
 </script>

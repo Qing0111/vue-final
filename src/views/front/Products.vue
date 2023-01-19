@@ -5,39 +5,27 @@
     <router-view />
   </article>
 
-  <main class="container">
+  <main class="container main-product">
     <div class="row">
-      <aside class="col-md-2">
-        <ul class="list">
+      <aside class="col-md-2 list">
+        <ul class="">
           <li><a href="#">All</a></li>
           <li><a href="#">Clothes</a></li>
           <li><a href="#">Pants</a></li>
         </ul>
       </aside>
-      <section class="col-md-10">
+      <section class="col-md-10 products">
         <div class="row g-3">
           <div
             class="col-sm-6 col-md-4"
             v-for="item in products"
             :key="item.id"
           >
-            <article class="card position-relative">
-              <img
-                :src="item.imageUrl"
-                class="card-img-top"
-                alt="圖片"
-                style="height: 240px"
-              />
-              <div
-                class="heart position-absolute text-danger"
-                @click="toggleFavorite(item.id)"
-              >
-                <i
-                  class="bi bi-suit-heart-fill"
-                  v-if="favoriteItems.includes(item.id)"
-                ></i>
-                <i class="bi bi-suit-heart" v-else></i>
-              </div>
+            <article class="card">
+              <router-link :to="`/product/${item.id}`">
+                <img :src="item.imageUrl" class="card-img-top" alt="圖片" />
+              </router-link>
+
               <div class="card-body">
                 <h5 class="card-title">{{ item.title }}</h5>
                 <p class="card-text" v-if="!item.price">
@@ -46,24 +34,37 @@
                 <p class="card-text" v-if="item.price">
                   原價 {{ item.origin_price }} 元
                 </p>
-                <div class="btn-group btn-group-sm w-100">
-                  <button type="button" class="btn btn-outline-secondary">
+                <div class="group">
+                  <!-- <button type="button" class="btn btn-outline-secondary">
                     查看更多
-                  </button>
+                  </button> -->
                   <button
                     type="button"
-                    class="btn btn-outline-danger"
+                    class="btn text-yellow shop"
                     @click="addToCart(item.id)"
                     :disabled="cartLoading == item.id"
                   >
-                    <span
-                      class="spinner-grow spinner-grow-sm text-danger"
+                    <!-- <span
+                      class="spinner-grow spinner-grow-sm text-white"
                       role="status"
                       v-if="cartLoading == item.id"
                     >
-                    </span>
-                    加到購物車
+                    </span> -->
+                    <i class="bi bi-cart3"></i>
                   </button>
+                  <div
+                    class="heart text-danger"
+                    @click="toggleFavorite(item.id)"
+                  >
+                    <i
+                      class="bi"
+                      :class="[
+                        favoriteItems.includes(item.id)
+                          ? 'bi-suit-heart-fill'
+                          : 'bi-suit-heart',
+                      ]"
+                    ></i>
+                  </div>
                 </div>
               </div>
             </article>
@@ -71,27 +72,52 @@
         </div>
       </section>
     </div>
+    <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
   </main>
-
-  <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
 </template>
 
 <style lang="scss">
-.list {
-  li {
-    a {
-      text-decoration: none;
-      color: #000;
-      font-size: 20px;
+.main-product {
+  padding: 40px 0;
+
+  .list {
+    li {
+      a {
+        text-decoration: none;
+        color: #000;
+        font-size: 20px;
+      }
     }
   }
-}
-.heart {
-  left: 90%;
-  top: 5px;
-  z-index: 1;
-  i {
-    font-size: 24px;
+  .products {
+    margin-bottom: 20px;
+    img {
+      object-fit: cover;
+      height: 200px;
+      cursor: pointer;
+
+      &::after {
+        content: "";
+      }
+    }
+    .group {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 4px;
+    }
+    .shop {
+      i {
+        font-size: 20px;
+      }
+    }
+    .heart {
+      cursor: pointer;
+      i {
+        font-size: 20px;
+        color: #c8a472;
+      }
+    }
   }
 }
 </style>

@@ -7,8 +7,13 @@
         </div>
         <article class="content">
           <h3>{{ item.product.title }}</h3>
-          <p>{{ item.product.origin_price }}</p>
-          <button class="btn btn-outline-danger">加到購物車</button>
+          <p>{{ item.product.origin_price }}元</p>
+          <button
+            class="btn btn-outline-danger"
+            @click="addToCart(item.product.id)"
+          >
+            加到購物車
+          </button>
         </article>
         <div class="cross" @click="removeFavoriteProduct(item.product.id, key)">
           <i class="bi bi-x-lg"></i>
@@ -101,13 +106,15 @@ export default {
     ...mapActions(cartStore, ["addToCart", "getCart"]),
 
     getFavoriteProduct() {
+      this.favoriteItems = this.getLocalFavorite();
+      // console.log(this.favoriteItems);
       if (this.favoriteItems) {
         this.favoriteItems.forEach((item) => {
           const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${item}`;
           // console.log(url);
           this.$http.get(url).then((res) => {
             this.favoriteProduct.push(res.data);
-            // console.log(res.data);
+            console.log(res.data);
           });
         });
       }
@@ -121,7 +128,6 @@ export default {
   created() {
     // this.getProducts();
     this.getCart();
-    
     this.getFavoriteProduct();
   },
 };
