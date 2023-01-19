@@ -106,15 +106,14 @@ export default {
     ...mapActions(cartStore, ["addToCart", "getCart"]),
 
     getFavoriteProduct() {
-      this.favoriteItems = this.getLocalFavorite();
-      // console.log(this.favoriteItems);
+      // this.favoriteItems = this.getLocalFavorite();
       if (this.favoriteItems) {
         this.favoriteItems.forEach((item) => {
           const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${item}`;
           // console.log(url);
           this.$http.get(url).then((res) => {
             this.favoriteProduct.push(res.data);
-            console.log(res.data);
+            // console.log(res.data);
           });
         });
       }
