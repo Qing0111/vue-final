@@ -1,6 +1,6 @@
 <template>
   <Loading :active="isLoading"></Loading>
-  <div class="my-5 row justify-content-center">
+  <div class="my-5 row justify-content-center check">
     <form class="col-md-6" @submit.prevent="payOrder">
       <table class="table align-middle">
         <thead>
@@ -56,6 +56,15 @@
     </form>
   </div>
 </template>
+
+<style lang="scss">
+.check {
+  min-height: calc(100vh - 254px);
+  width: 100%;
+  form {
+  }
+}
+</style>
 
 <script>
 export default {

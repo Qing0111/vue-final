@@ -296,7 +296,7 @@ export default {
       this.$http.post(url, { data: order }).then((res) => {
         console.log(res.data.orderId);
         this.getCart();
-        this.$router.push(`/user/checkout/${res.data.orderId}`);
+        this.$router.push(`/checkout/${res.data.orderId}`);
       });
     },
   },
