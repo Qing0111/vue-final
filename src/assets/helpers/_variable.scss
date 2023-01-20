@@ -47,6 +47,7 @@ $green: #198754 !default;
 $teal: #20c997 !default;
 $cyan: #0dcaf0 !default;
 $brown: #c8a472 !default;
+$brown-deep: #54433c !default;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -65,6 +66,7 @@ $colors: (
   "white": $white,
   "gray": $gray-600,
   "gray-dark": $gray-800,
+  "brown-deep": #54433c,
 ) !default;
 // scss-docs-end colors-map
 
@@ -320,6 +322,7 @@ $theme-colors: (
   "light": $light,
   "dark": $dark,
   "yellow": #c8a472,
+  "brown-deep": #54433c,
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -1555,7 +1558,7 @@ $breadcrumb-item-padding-x: 0.5rem !default;
 $breadcrumb-margin-bottom: 1rem !default;
 $breadcrumb-bg: null !default;
 $breadcrumb-divider-color: $gray-600 !default;
-$breadcrumb-active-color: $gray-600 !default;
+$breadcrumb-active-color: $brown !default;
 $breadcrumb-divider: quote("/") !default;
 $breadcrumb-divider-flipped: $breadcrumb-divider !default;
 $breadcrumb-border-radius: null !default;

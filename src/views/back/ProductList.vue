@@ -1,7 +1,11 @@
 <template>
   <Loading :active="isLoading"></Loading>
   <div class="text-end">
-    <button class="btn btn-dark" type="button" @click="openModal(true)">
+    <button
+      class="btn btn-yellow text-white"
+      type="button"
+      @click="openModal(true)"
+    >
       增加一個產品
     </button>
   </div>
@@ -111,7 +115,7 @@ export default {
         this.isLoading = false;
         this.$refs.DelModal.hideModal();
         this.getProducts();
-        this.pushMessage(res, { title: '刪除' });
+        this.pushMessage(res, { title: "刪除" });
       });
     },
     openModal(isNew, item) {
@@ -139,7 +143,7 @@ export default {
         // console.log(res);
         this.isLoading = false;
         this.$refs.productModal.hideModal();
-        this.pushMessage(res, { title: '更新' });
+        this.pushMessage(res, { title: "更新" });
         // if (res.data.success) {
         //   this.getProducts();
         //   this.emitter.emit("push-message", {

@@ -1,8 +1,11 @@
 <template>
   <Loading :active="isLoading"></Loading>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark bg-brown-deep"
+    style="height: 60px"
+  >
     <div class="container-fluid">
-      <a class="navbar-brand">後台管理</a>
+      <a class="navbar-brand">RabbitFamily後台管理</a>
       <button
         class="navbar-toggler"
         type="button"

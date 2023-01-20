@@ -7,7 +7,7 @@ const routes = [
     component: () => import("../views/front/Userboard.vue"),
     children: [
       {
-        path: "home",
+        path: "",
         component: () => import("../views/front/Home.vue"),
       },
       {
@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: "/login",
-    component: () => import("../views/back/Login.vue"),
+    component: () => import("../views/front/Login.vue"),
   },
   {
     path: "/dashboard",
@@ -50,7 +50,7 @@ const routes = [
       },
       {
         path: "coupons",
-        component: () => import("../views/front/Coupons.vue"),
+        component: () => import("../views/back/Coupons.vue"),
       },
     ],
   },

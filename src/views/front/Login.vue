@@ -1,11 +1,12 @@
 <template>
   <!-- <Loading :active="isLoading"></Loading> -->
-  <div class="container mt-5">
-    <form class="row justify-content-center" @submit.prevent="signIn">
+  <Navbar></Navbar>
+  <div class="container login">
+    <form class="row justify-content-center mb-5" @submit.prevent="signIn">
       <div class="col-md-6">
-        <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
-        <div class="mb-2">
-          <label for="inputEmail" class="sr-only">Email address</label>
+        <h1 class="h3 mb-4 font-weight-normal">後台登入</h1>
+        <div class="mb-3">
+          <label for="inputEmail" class="sr-only mb-1">Email address</label>
           <input
             type="email"
             id="inputEmail"
@@ -17,7 +18,7 @@
           />
         </div>
         <div class="mb-2">
-          <label for="inputPassword" class="sr-only">Password</label>
+          <label for="inputPassword" class="sr-only mb-1">Password</label>
           <input
             type="password"
             id="inputPassword"
@@ -29,16 +30,36 @@
         </div>
 
         <div class="text-end mt-4">
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+          <button class="btn btn-yellow w-100 text-white" type="submit">
             登入
           </button>
         </div>
       </div>
     </form>
   </div>
+  <Footer></Footer>
 </template>
 
+<style lang="scss">
+.login {
+  height: calc(100vh - 158px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  form {
+    width: 100%;
+
+    h1 {
+      font-size: 32px;
+    }
+  }
+}
+</style>
+
 <script>
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+
 export default {
   data() {
     return {
@@ -48,6 +69,10 @@ export default {
         isLoading: false,
       },
     };
+  },
+  components: {
+    Navbar,
+    Footer,
   },
   methods: {
     signIn() {

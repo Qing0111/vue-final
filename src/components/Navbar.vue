@@ -1,17 +1,17 @@
 <template>
   <header>
     <section class="discount">
-      <p>輸入優惠碼 : 52rabbit，可享有8折優惠</p>
+      <p>輸入優惠碼 : 52rabbit，可享有8折優惠!</p>
     </section>
     <section class="container header">
       <nav>
         <ul>
-          <li><a href="#/home">首頁</a></li>
+          <li><a href="#/">首頁</a></li>
           <li><a href="#/products">商品</a></li>
         </ul>
       </nav>
       <div class="logo">
-        <h1><a href="#/home" id="">RabbitFamily</a></h1>
+        <h1><a href="#/" id="">RabbitFamily</a></h1>
       </div>
       <ul class="collect-shop">
         <li>
@@ -42,11 +42,21 @@ header {
   background-color: #54433c;
   .discount {
     background-color: #f9ba37;
-    padding: 4px 12px;
-    text-align: center;
+    padding: 4px 0px;
+    // text-align: center;
+    overflow: hidden;
     p {
-      color: #54433c;
+      animation: discount-move 10s linear infinite;
+      color: #000;
       font-size: 14px;
+    }
+  }
+  @keyframes discount-move {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
     }
   }
   .header {

@@ -21,7 +21,10 @@
           page
         }}</a>
       </li>
-      <li class="page-item" :class="{ disabled: pages.has_next === false }">
+      <li
+        class="page-item"
+        :class="{ disabled: pages.has_next === false }"
+      >
         <a
           class="page-link"
           href="#"

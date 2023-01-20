@@ -8,17 +8,34 @@
   <main class="container main-product">
     <div class="row">
       <aside class="col-md-2 list">
-        <ul class="">
-          <li><a href="#">All</a></li>
-          <li><a href="#">Clothes</a></li>
-          <li><a href="#">Pants</a></li>
+        <ul class="" v-for="(item, key) in tabs" :key="key">
+          <li class="mb-2">
+            <a
+              href="#"
+              :class="{ 'text-yellow': item.title === tabState }"
+              @click.prevent="tabState = item.title"
+              >{{ item.title }}</a
+            >
+          </li>
         </ul>
       </aside>
       <section class="col-md-10 products">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <router-link to="/" class="text-decoration-none text-dark"
+                >首頁</router-link
+              >
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ tabState }}
+            </li>
+          </ol>
+        </nav>
         <div class="row g-3">
           <div
             class="col-sm-6 col-md-4"
-            v-for="item in products"
+            v-for="item in productCategory"
             :key="item.id"
           >
             <article class="card">
@@ -72,14 +89,14 @@
         </div>
       </section>
     </div>
-    <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
+    <Pagination :pages="pagination" @emit-pages="setPagination"></Pagination>
   </main>
 </template>
 
 <style lang="scss">
 .main-product {
-  padding: 40px 0;
-
+  padding: 60px 0;
+  min-height: calc(100vh - 174px);
   .list {
     li {
       a {
@@ -90,7 +107,7 @@
     }
   }
   .products {
-    margin-bottom: 20px;
+    margin-bottom: 52px;
     img {
       object-fit: cover;
       height: 200px;
@@ -147,12 +164,51 @@ export default {
     return {
       product: {},
       favoriteItems: this.getLocalFavorite() || [],
+      tabs: [
+        {
+          title: "全部商品",
+        },
+        {
+          title: "兔子",
+        },
+        {
+          title: "牧草",
+        },
+        {
+          title: "飼料",
+        },
+      ],
+      tabState: "全部商品",
+      pagination: {
+        current_page: 1,
+        total_pages: 1,
+        has_pre: false,
+        has_next: true,
+      },
+      productCategory: [],
     };
   },
   computed: {
-    ...mapState(productStore, ["products", "pagination"]),
+    ...mapState(productStore, ["products"]),
     ...mapState(cartStore, ["cart"]),
     ...mapState(statusStore, ["isLoading", "cartLoading"]),
+
+    filterData() {
+      if (this.tabState == "全部商品") {
+        return this.products;
+      } else if (this.tabState == "兔子") {
+        return this.products.filter((item) => item.category == this.tabState);
+      } else if (this.tabState == "牧草") {
+        return this.products.filter((item) => item.category == this.tabState);
+      } else if (this.tabState == "飼料") {
+        return this.products.filter((item) => item.category == this.tabState);
+      }
+    },
+  },
+  watch: {
+    filterData() {
+      this.setPagination();
+    },
   },
   methods: {
     ...mapActions(productStore, ["getProducts"]),
@@ -160,6 +216,18 @@ export default {
 
     getProduct(id) {
       this.$router.push(`/product/${id}`);
+    },
+    setPagination(page = 1) {
+      const filterProduct = [...this.filterData];
+      const totalPage = Math.ceil(filterProduct.length / 10);
+
+      this.pagination = {
+        current_page: page,
+        total_pages: totalPage,
+        has_pre: page > 1,
+        has_next: page < totalPage,
+      };
+      this.productCategory = filterProduct.splice((page - 1) * 9, page * 9);
     },
   },
   created() {

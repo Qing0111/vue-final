@@ -4,7 +4,9 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link to="/user/cart">購物車</router-link>
+          <router-link to="/products" class="text-decoration-none text-dark"
+            >購物車</router-link
+          >
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           {{ product.title }}
@@ -48,6 +50,11 @@ export default {
       product: {},
       id: "",
     };
+  },
+  computed: {
+    filterData() {
+      
+    },
   },
   methods: {
     getProduct() {
