@@ -17,7 +17,7 @@ export default {
   components: {
     Navbar,
     ToastMessages,
-    Footer
+    Footer,
   },
   provide() {
     return {

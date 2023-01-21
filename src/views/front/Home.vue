@@ -1,4 +1,14 @@
 <template>
+  <Loading :active="isLoading">
+    <div class="loadingio-spinner-double-ring-juf8237g2sc">
+      <div class="ldio-1prs6fceeog">
+        <div></div>
+        <div></div>
+        <div><div></div></div>
+        <div><div></div></div>
+      </div>
+    </div>
+  </Loading>
   <main>
     <section class="banner">
       <swiper
@@ -14,11 +24,7 @@
           <article class="content">
             <h2>RabbitFamily</h2>
             <p>The best for your bunny</p>
-            <a
-              href="#/products"
-              class="btn btn-yellow text-white"
-              >shop now</a
-            >
+            <a href="#/products" class="btn btn-yellow text-white">shop now</a>
           </article>
         </swiper-slide>
         <swiper-slide>
@@ -30,13 +36,12 @@
           </article>
         </swiper-slide>
       </swiper>
-      <!-- <img src="@/assets/image/banner.jpg" alt="banner圖" />
-      <article class="content">
-        <h2>RabbitFamily</h2>
-        <p>The best for your bunny</p>
-        <a href="#/products" class="btn btn-outline-yellow">shop now</a>
-      </article> -->
     </section>
+
+    <section class="product-category">
+      
+    </section>
+
     <section class="information">
       <article class="contact">
         <h3>聯絡我們</h3>
@@ -68,20 +73,21 @@
 <style lang="scss">
 .banner {
   position: relative;
+
   .swiper-pagination-bullet-active {
     background-color: #9e805a;
   }
   img {
     width: 100%;
-    // height: calc(100vh - 82px);
-    height: 820px;
+    height: 420px;
+
     object-fit: cover;
     vertical-align: bottom;
   }
   .content {
     position: absolute;
-    top: 80%;
-    left: 10%;
+    top: 77%;
+    left: 8%;
     transform: translateY(-50%);
     h2 {
       font-size: 32px;
@@ -104,14 +110,17 @@
   }
 }
 @media (min-width: 768px) {
-  .banner{
-
+  .banner {
+    img {
+      height: 820px;
+    }
     .content {
       top: 50%;
-      left: 20%;
+      left: 16%;
     }
   }
 }
+
 .information {
   background-color: #9e805a;
   width: 100%;
@@ -189,6 +198,7 @@
 import { mapState, mapActions } from "pinia";
 import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
+import statusStore from "@/stores/statusStore";
 import { Swiper, SwiperSlide } from "swiper/vue";
 // Import Swiper styles
 import "swiper/css";
@@ -208,9 +218,11 @@ export default {
   },
   computed: {
     ...mapState(cartStore, ["cart"]),
+    ...mapState(statusStore, ["isLoading"]),
   },
   methods: {
     ...mapActions(cartStore, ["addToCart", "getCart"]),
+
   },
   created() {
     console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH);

@@ -3,6 +3,7 @@ import { createPinia } from "pinia";
 import VueAxios from "vue-axios";
 import axios from "axios";
 import Loading from "vue3-loading-overlay";
+import "bootstrap/dist/js/bootstrap";
 import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 // 匯入 vee-validate 主套件

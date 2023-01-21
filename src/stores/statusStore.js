@@ -9,9 +9,9 @@ export default defineStore("statusStore", {
     };
   },
   actions: {
-    pushMessage(res, data) {
-      const { title = "更新", content, style = "success" } = data;
-      if (res.data.success) {
+    pushMessage(res = true, data) {
+      const { title = "更新", content, style = "yellow" } = data;
+      if (res) {
         this.messages.push({ style, title: `${title}成功`, content });
       } else {
         this.messages.push({

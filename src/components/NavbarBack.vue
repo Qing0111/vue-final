@@ -1,17 +1,16 @@
 <template>
   <Loading :active="isLoading"></Loading>
-  <nav
-    class="navbar navbar-expand-lg navbar-dark bg-brown-deep"
-    style="height: 60px"
-  >
-    <div class="container-fluid">
-      <a class="navbar-brand">RabbitFamily後台管理</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-brown-deep">
+    <div class="container-fluid back-title">
+      <h2>
+        <a class="navbar-brand">RabbitFamily後台管理</a>
+      </h2>
       <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
@@ -25,15 +24,28 @@
           <router-link to="/dashboard/orders" class="nav-link"
             >訂單</router-link
           >
+
           <router-link to="/dashboard/coupons" class="nav-link"
             >優惠券</router-link
           >
+
           <a class="nav-link" href="#" @click.prevent="logout">登出</a>
         </nav>
       </div>
     </div>
   </nav>
 </template>
+
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
+
+.back-title {
+  h2 a {
+    font-family: "Kalam", cursive;
+    font-size: 24px;
+  }
+}
+</style>
 
 <script>
 export default {

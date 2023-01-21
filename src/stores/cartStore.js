@@ -13,7 +13,7 @@ export default defineStore("cartStore", {
 
   actions: {
     addToCart(id) {
-      console.log(id);
+      // console.log(id);
       status.cartLoading = id;
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
@@ -22,9 +22,8 @@ export default defineStore("cartStore", {
       };
       axios.post(url, { data: cart }).then((res) => {
         status.cartLoading = "";
-        // this.$httpMessageState(res, "加入購物車");
-        status.pushMessage(res, { title: '加入購物車' })
-        // console.log(res);
+        console.log(res.data);
+        status.pushMessage(res.data.success, { title: "加入購物車" });
         this.getCart();
       });
     },
@@ -58,8 +57,7 @@ export default defineStore("cartStore", {
       axios.delete(url).then((res) => {
         status.isLoading = false;
         console.log(res);
-        // this.$httpMessageState(res, "刪除");
-        status.pushMessage(res, { title: '刪除' })
+        status.pushMessage(res.data.success, { title: "刪除" });
         this.getCart();
       });
     },
