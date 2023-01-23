@@ -19,7 +19,7 @@
               <a
                 href="#"
                 :class="{ active: item.title === tabState }"
-                @click.prevent="tabState = item.title"
+                @click.prevent="category(item.title)"
                 >{{ item.title }}</a
               >
             </li>
@@ -45,18 +45,20 @@
             v-for="item in productCategory"
             :key="item.id"
           >
-            <article class="card">
+            <article class="card product-card">
               <router-link :to="`/product/${item.id}`">
-                <img :src="item.imageUrl" class="card-img-top" alt="圖片" />
+                <div class="pic">
+                  <img :src="item.imageUrl" class="card-img-top" alt="圖片" />
+                </div>
               </router-link>
 
               <div class="card-body">
-                <h5 class="card-title">{{ item.title }}</h5>
+                <h5 class="card-title fs-5">{{ item.title }}</h5>
                 <p class="card-text" v-if="!item.price">
                   {{ item.origin_price }} 元
                 </p>
                 <p class="card-text" v-if="item.price">
-                  原價 {{ item.origin_price }} 元
+                  NT${{ item.origin_price }}
                 </p>
                 <div class="group">
                   <div
@@ -99,52 +101,69 @@
 <style lang="scss">
 .main-product {
   padding: 60px 20px;
-  min-height: calc(100vh - 174px);
-
+  min-height: calc(100vh - 158px);
   .list {
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     h2 {
       font-size: 24px;
       margin-bottom: 9px;
       color: #54433c;
     }
     ul {
-      border: 1px solid #c8a472;
-      box-shadow: 1px 1px 2px #967b55;
+      display: flex;
+      gap: 8px;
     }
     li {
-      border-bottom: 1px solid #c8a472;
-      &:last-child {
-        border-bottom: 0;
-      }
+      border: 1px solid #c8a472;
+      border-radius: 50px;
       a {
         text-decoration: none;
         display: inline-block;
         width: 100%;
-
         color: #000;
-        font-size: 20px;
-        padding: 12px;
+        font-size: 16px;
+        padding: 10px;
         &.active {
           background-color: #c8a472;
           color: #fff;
+          border-radius: 50px;
         }
       }
     }
   }
   .products {
     margin-bottom: 52px;
-    .card {
+    .product-card {
       box-shadow: 1px 1px 2px #ccc;
-    }
-    img {
-      width: 100%;
-      object-fit: cover;
-      height: 320px;
-      cursor: pointer;
-
-      &::after {
-        content: "";
+      transition: box-shadow 0.5s;
+      &:hover {
+        box-shadow: none;
+      }
+      .pic {
+        width: 100%;
+        position: relative;
+        &::after {
+          content: "see more";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          inset: 0 0;
+          color: #fff;
+          font-size: 24px;
+          margin: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(84, 67, 60, 0.5);
+          clip-path: circle(50px at center);
+        }
+        img {
+          width: 100%;
+          object-fit: cover;
+          height: 240px;
+          cursor: pointer;
+          vertical-align: bottom;
+        }
       }
     }
     .group {
@@ -152,7 +171,7 @@
       justify-content: flex-end;
       align-items: center;
       margin-top: 4px;
-      gap: 4px;
+      gap: 8px;
     }
     .shop {
       cursor: pointer;
@@ -169,9 +188,54 @@
     }
   }
 }
-@media (min-width: 576px) {
-  main {
-    padding: 60px 0;
+@media (min-width: 768px) {
+  .main-product {
+    padding: 60px 20px;
+    .list {
+      h2 {
+        font-size: 24px;
+        margin-bottom: 9px;
+        color: #54433c;
+      }
+      ul {
+        border: 1px solid #c8a472;
+        box-shadow: 1px 1px 2px #967b55;
+        display: block;
+      }
+      li {
+        border: 0;
+        border-bottom: 1px solid #c8a472;
+        border-radius: 0px;
+        &:last-child {
+          border-bottom: 0;
+        }
+        a {
+          padding: 12px;
+          &.active {
+            border-radius: 0px;
+          }
+        }
+      }
+    }
+    .products {
+      margin-bottom: 52px;
+      .product-card {
+        .pic {
+          &::after {
+            content: "";
+            clip-path: circle(300px at center);
+            transition: clip-path 0.3s;
+          }
+          img {
+            height: 300px;
+          }
+        }
+        &:hover .pic::after {
+          content: "see more";
+          clip-path: circle(50px at center);
+        }
+      }
+    }
   }
 }
 </style>
@@ -218,7 +282,7 @@ export default {
           title: "兔用品",
         },
       ],
-      tabState: "全部",
+      tabState: "",
       pagination: {
         current_page: 1,
         total_pages: 1,
@@ -229,27 +293,28 @@ export default {
     };
   },
   computed: {
-    ...mapState(productStore, ["products"]),
+    ...mapState(productStore, ["products", "State"]),
     ...mapState(cartStore, ["cart"]),
     ...mapState(statusStore, ["isLoading", "cartLoading"]),
 
     filterData() {
+      let filterValue = [];
       if (this.tabState == "全部") {
-        return this.products;
-      } else if (this.tabState == "兔子") {
-        return this.products.filter((item) => item.category == this.tabState);
-      } else if (this.tabState == "牧草") {
-        return this.products.filter((item) => item.category == this.tabState);
-      } else if (this.tabState == "飼料") {
-        return this.products.filter((item) => item.category == this.tabState);
-      } else if (this.tabState == "兔用品") {
-        return this.products.filter((item) => item.category == this.tabState);
+        filterValue = this.products;
+      } else if (this.tabState) {
+        filterValue = this.products.filter(
+          (item) => item.category == this.tabState
+        );
       }
+      return filterValue;
     },
   },
   watch: {
     filterData() {
       this.setPagination();
+    },
+    $route() {
+      this.tabState = this.$route.query.category;
     },
   },
   methods: {
@@ -259,10 +324,13 @@ export default {
     getProduct(id) {
       this.$router.push(`/product/${id}`);
     },
+    category(category) {
+      this.$router.push({ name: "products", query: { category } });
+      this.tabState = category;
+    },
     setPagination(page = 1) {
       const filterProduct = [...this.filterData];
       const totalPage = Math.ceil(filterProduct.length / 10);
-
       this.pagination = {
         current_page: page,
         total_pages: totalPage,
@@ -275,6 +343,7 @@ export default {
   created() {
     this.getProducts();
     this.getCart();
+    this.tabState = this.$route.query.category || "全部";
   },
 };
 </script>

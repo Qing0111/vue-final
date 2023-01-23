@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="sticky-top">
     <section class="discount">
       <p>輸入優惠碼 : 52rabbit，可享有8折優惠!</p>
     </section>
@@ -20,7 +20,7 @@
           </li>
           <li>
             <a
-              href="#/products"
+              href="#/products?category=全部"
               @click="toggleBurger"
               :class="{ active: this.$route.path == '/products' }"
               >商品</a
@@ -190,6 +190,9 @@ header {
 }
 @media (min-width: 768px) {
   header {
+    // position: fixed;
+    // top: 0;
+    z-index: 5;
     width: 100%;
     background-color: #54433c;
     .discount {

@@ -1,82 +1,120 @@
 <template>
   <main class="container">
-    <section v-for="(item, key) in favoriteProduct" :key="key">
-      <div class="card-favorite">
-        <div class="pic">
-          <img :src="item.product.imageUrl" alt="產品圖片" />
-        </div>
-        <article class="content">
-          <h3>{{ item.product.title }}</h3>
-          <p>{{ item.product.origin_price }}元</p>
-          <button
-            class="btn btn-outline-danger"
-            @click="addToCart(item.product.id)"
+    <section class="favorite" v-if="favoriteProduct.length">
+      <template v-for="(item, key) in favoriteProduct" :key="key">
+        <div class="card-favorite">
+          <div class="pic">
+            <img :src="item.product.imageUrl" alt="產品圖片" />
+          </div>
+          <article class="content">
+            <h3>{{ item.product.title }}</h3>
+            <p>{{ item.product.origin_price }}元</p>
+            <button
+              class="btn btn-yellow text-white"
+              @click="addToCart(item.product.id)"
+            >
+              加到購物車
+            </button>
+          </article>
+          <div
+            class="cross"
+            @click="removeFavoriteProduct(item.product.id, key)"
           >
-            加到購物車
-          </button>
-        </article>
-        <div class="cross" @click="removeFavoriteProduct(item.product.id, key)">
-          <i class="bi bi-x-lg"></i>
+            <i class="bi bi-x-lg"></i>
+          </div>
         </div>
-      </div>
+      </template>
+    </section>
+    <section
+      class="empty-cart d-flex justify-content-center align-items-center"
+      v-else
+    >
+      <article class="h-100">
+        <h2>目前您的收藏沒有任何商品!</h2>
+        <a href="#/Products" class="btn btn-yellow text-white">繼續購物</a>
+      </article>
     </section>
   </main>
 </template>
 
 <style lang="scss">
-.card-favorite {
-  border: none;
-  margin-bottom: 20px;
-  position: relative;
-  .pic {
-    height: 200px;
-    border-radius: 24px;
-    overflow: hidden;
-    img {
-      width: 100%;
-      height: 100%;
-      vertical-align: bottom;
-      object-fit: cover;
-    }
-  }
-  .content {
-    h3 {
-      margin-bottom: 12px;
-      font-size: 20px;
-    }
-    p {
-      margin-bottom: 8px;
-    }
-  }
-  .cross {
-    position: absolute;
-    top: 0;
-    right: 1%;
-    font-size: 40px;
-  }
-  &::after {
-    content: "";
-    margin-top: 12px;
-    border-bottom: 1px solid #000;
-  }
-}
-@media (min-width: 576px) {
+.favorite {
+  padding: 60px 20px;
+  min-height: calc(100vh - 158px);
   .card-favorite {
-    display: flex;
-    padding: 0 10%;
+    border: none;
+    margin-bottom: 20px;
+    position: relative;
     .pic {
-      width: 40%;
-      // height: 100%;
+      height: 200px;
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      img {
+        width: 100%;
+        height: 100%;
+        vertical-align: bottom;
+        object-fit: cover;
+      }
     }
     .content {
-      padding: 12px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 0 8px;
+      h3 {
+        margin-bottom: 12px;
+        font-size: 20px;
+      }
+      p {
+        margin-bottom: 8px;
+      }
     }
     .cross {
-      right: 10%;
+      position: absolute;
+      top: 0;
+      // left: 87%;
+      right: 1%;
+      font-size: 48px;
+      cursor: pointer;
     }
+    &::after {
+      content: "";
+      margin-top: 12px;
+      border-bottom: 1px solid #000;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .favorite {
+    padding: 60px 5%;
+
+    .card-favorite {
+      display: flex;
+      .pic {
+        width: 40%;
+        // height: 100%;
+        margin-bottom: 0;
+      }
+      .content {
+        padding: 12px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .cross {
+        right: 10%;
+      }
+    }
+  }
+}
+
+.empty-cart {
+  min-height: calc(100vh - 158px);
+  text-align: center;
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  a {
   }
 }
 </style>

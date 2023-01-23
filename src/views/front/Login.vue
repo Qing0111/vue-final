@@ -1,7 +1,7 @@
 <template>
   <!-- <Loading :active="isLoading"></Loading> -->
   <Navbar></Navbar>
-  <div class="container login">
+  <main class="container login">
     <form class="row justify-content-center mb-5" @submit.prevent="signIn">
       <div class="col-md-6">
         <h1 class="h3 mb-4 font-weight-normal">後台登入</h1>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </form>
-  </div>
+  </main>
   <Footer></Footer>
 </template>
 

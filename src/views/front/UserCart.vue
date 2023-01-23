@@ -1,6 +1,6 @@
 <template>
   <Loading :active="isLoading"></Loading>
-  <div class="container">
+  <main class="container">
     <div class="row mt-4">
       <div class="col-md-7">
         <table class="table align-middle">
@@ -69,7 +69,7 @@
       </div>
       <!-- 購物車列表 -->
       <div class="col-md-5">
-        <div class="sticky-top">
+        <div class="">
           <table class="table align-middle">
             <thead>
               <tr>
@@ -236,7 +236,7 @@
         </div>
       </Form>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -252,7 +252,7 @@ export default {
       // status: {
       //   loadingItem: "",
       // },
-      
+
       coupon_code: "",
       form: {
         user: {
@@ -272,7 +272,12 @@ export default {
   },
   methods: {
     ...mapActions(productStore, ["getProducts"]),
-    ...mapActions(cartStore, ["addToCart", "getCart", "updateCart", "removeCartItem"]),
+    ...mapActions(cartStore, [
+      "addToCart",
+      "getCart",
+      "updateCart",
+      "removeCartItem",
+    ]),
 
     getProduct(id) {
       this.$router.push(`/user/product/${id}`);
