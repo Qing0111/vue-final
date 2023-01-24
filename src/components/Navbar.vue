@@ -44,7 +44,7 @@
             :class="{ active: this.$route.path == '/favorite' }"
             ><i class="bi bi-suit-heart"></i
           ></a>
-          <article class="text-white" v-if="favoriteItems">
+          <article class="text-white" v-if="favoriteItems.length">
             {{ favoriteItems.length }}
           </article>
         </li>
@@ -52,8 +52,8 @@
           <a href="#/cart" :class="{ active: this.$route.path == '/cart' }"
             ><i class="bi bi-cart3"></i
           ></a>
-          <article class="text-white" v-if="cart.carts">
-            {{ cart.carts.length }}
+          <article class="text-white" v-if="cart.length">
+            {{ cart.length }}
           </article>
         </li>
       </ul>
@@ -310,6 +310,8 @@ export default {
     ...mapState(cartStore, ["cart"]),
   },
   methods: {
+    ...mapActions(cartStore, ["getCart"]),
+
     toggleBurger() {
       this.$refs.nav.classList.toggle("active");
       this.$refs.burger.classList.toggle("none");
@@ -320,6 +322,7 @@ export default {
     emitter.on("updateFavorite", () => {
       this.favoriteItems = this.getLocalFavorite();
     });
+    this.getCart();
   },
 };
 </script>

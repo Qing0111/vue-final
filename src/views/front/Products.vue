@@ -9,7 +9,7 @@
       </div></div
   ></Loading>
 
-  <main class="container main-product">
+  <main class="container-md main-product">
     <div class="row">
       <aside class="col-md-3 col-lg-2 list">
         <h2>類別 /</h2>

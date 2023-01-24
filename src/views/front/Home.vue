@@ -36,7 +36,7 @@
         </swiper-slide>
       </swiper>
     </section>
-    <div class="container">
+    <div class="container-md">
       <section class="main-content">
         <section class="product-commodity">
           <a href="#/products?category=飼料">
@@ -61,11 +61,7 @@
         <section class="new-product">
           <h2>兔用新品</h2>
           <div class="row g-3">
-            <div
-              class="col-sm-6 col-lg-4"
-              v-for="item in filterData"
-              :key="item.id"
-            >
+            <div class="col-md-4" v-for="item in filterData" :key="item.id">
               <article class="card product-card">
                 <router-link :to="`/product/${item.id}`">
                   <div class="pic">
@@ -230,7 +226,7 @@
 }
 
 .main-content {
-  padding: 16px;
+  padding: 8px;
   position: relative;
   top: -36px;
   z-index: 3;
@@ -281,7 +277,9 @@
       }
     }
   }
-
+  @media (min-width: 768px) {
+    padding: 20px;
+  }
   .new-product {
     margin-bottom: 40px;
     h2 {
@@ -464,7 +462,6 @@
 
     .new-product {
       margin-bottom: 40px;
-
 
       .product-card {
         .pic {

@@ -67,6 +67,11 @@
 </style>
 
 <script>
+import { mapState, mapActions } from "pinia";
+import productStore from "@/stores/productStore";
+import cartStore from "@/stores/cartStore";
+import statusStore from "@/stores/statusStore";
+
 export default {
   data() {
     return {
@@ -75,9 +80,31 @@ export default {
       },
       orderId: "",
       isLoading: false,
+      form: {
+        user: {
+          name: "",
+          email: "",
+          tel: "",
+          address: "",
+        },
+        message: "",
+      },
     };
   },
+  computed: {
+    ...mapState(productStore, ["sortProducts"]),
+    ...mapState(cartStore, ["cart"]),
+    ...mapState(statusStore, ["isLoading", "cartLoading"]),
+  },
   methods: {
+    ...mapActions(productStore, ["getProducts"]),
+    ...mapActions(cartStore, [
+      "addToCart",
+      "getCart",
+      "updateCart",
+      "removeCartItem",
+    ]),
+
     getOrder() {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${this.orderId}`;
       this.$http.get(url).then((res) => {
@@ -96,10 +123,20 @@ export default {
         }
       });
     },
+    createOrder() {
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
+      const order = this.form;
+      this.$http.post(url, { data: order }).then((res) => {
+        console.log(res.data.orderId);
+        this.getCart();
+        this.$router.push(`/checkout/${res.data.orderId}`);
+      });
+    },
   },
   mounted() {
     this.orderId = this.$route.params.orderId;
     this.getOrder();
+
   },
 };
 </script>

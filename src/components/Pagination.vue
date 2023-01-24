@@ -41,11 +41,12 @@
   .page-style {
     display: inline-block;
     text-align: center;
-    line-height: 32px;
+    line-height: 28px;
     text-decoration: none;
     color: #54433c;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
+    margin: 0 4px;
     &:hover,
     &.active {
       background-color: #c8a472;
@@ -53,6 +54,8 @@
     }
     &.disabled {
       pointer-events: none;
+      cursor: default;
+      opacity: 0.6;
     }
   }
 }

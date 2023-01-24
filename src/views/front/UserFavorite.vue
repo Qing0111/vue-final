@@ -1,6 +1,31 @@
 <template>
-  <main class="container">
+  <Loading :active="isLoading">
+    <div class="loadingio-spinner-double-ring-juf8237g2sc">
+      <div class="ldio-1prs6fceeog">
+        <div></div>
+        <div></div>
+        <div><div></div></div>
+        <div><div></div></div>
+      </div>
+    </div>
+  </Loading>
+  <main class="container-md">
     <section class="favorite" v-if="favoriteProduct.length">
+      <nav aria-label="breadcrumb tabs">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <router-link to="/" class="text-decoration-none text-dark"
+              >首頁</router-link
+            >
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">我的收藏</li>
+          <li class="ms-auto">
+            <a href="#" class="text-yellow" @click.prevent="clearLocal"
+              >清除全部</a
+            >
+          </li>
+        </ol>
+      </nav>
       <template v-for="(item, key) in favoriteProduct" :key="key">
         <div class="card-favorite">
           <div class="pic">
@@ -31,7 +56,7 @@
     >
       <article class="h-100">
         <h2>目前您的收藏沒有任何商品!</h2>
-        <a href="#/Products" class="btn btn-yellow text-white">繼續購物</a>
+        <a href="#/Products" class="btn btn-yellow text-white">來去購物</a>
       </article>
     </section>
   </main>
@@ -41,10 +66,28 @@
 .favorite {
   padding: 60px 20px;
   min-height: calc(100vh - 158px);
+  .tabs {
+    ol li {
+      padding: 0;
+    }
+  }
   .card-favorite {
     border: none;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -20px;
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+    }
+    &:last-child::after {
+      width: 0;
+      height: 0;
+    }
     .pic {
       height: 200px;
       border-radius: 24px;
@@ -64,16 +107,16 @@
         font-size: 20px;
       }
       p {
-        margin-bottom: 8px;
+        margin-bottom: 24px;
       }
     }
     .cross {
       position: absolute;
       top: 0;
-      // left: 87%;
       right: 1%;
       font-size: 48px;
       cursor: pointer;
+      color: #9e805a;
     }
     &::after {
       content: "";
@@ -100,7 +143,7 @@
         justify-content: center;
       }
       .cross {
-        right: 10%;
+        right: 0;
       }
     }
   }
@@ -114,8 +157,6 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
-  a {
-  }
 }
 </style>
 
@@ -125,6 +166,7 @@ import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
 import localFavorite from "@/mixins/localFavorite";
+import emitter from "@/methods/emitter";
 
 export default {
   data() {
@@ -157,7 +199,6 @@ export default {
       }
     },
     removeFavoriteProduct(id, key) {
-      console.log(this.favoriteItems.indexOf(id));
       this.toggleFavorite(id);
       this.favoriteProduct.splice(key, 1);
     },
@@ -166,6 +207,9 @@ export default {
     // this.getProducts();
     this.getCart();
     this.getFavoriteProduct();
+    emitter.on("updateFavorite", () => {
+      this.favoriteItems = this.getLocalFavorite();
+    });
   },
 };
 </script>

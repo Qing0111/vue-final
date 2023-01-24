@@ -7,7 +7,7 @@ const status = statusStore();
 export default defineStore("cartStore", {
   state: () => {
     return {
-      cart: {},
+      cart: [],
     };
   },
 
@@ -31,8 +31,8 @@ export default defineStore("cartStore", {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       status.isLoading = true;
       axios.get(url).then((res) => {
-        // console.log(res.data.data);
-        this.cart = res.data.data;
+        console.log(res.data.data.carts);
+        this.cart = res.data.data.carts;
         status.isLoading = false;
       });
     },
