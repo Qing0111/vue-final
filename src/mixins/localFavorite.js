@@ -10,6 +10,7 @@ export default {
     ...mapActions(statusStore, ["pushMessage"]),
 
     toggleFavorite(id) {
+      // console.log(id);
       if (this.favoriteItems.includes(id)) {
         this.favoriteItems.splice(this.favoriteItems.indexOf(id), 1);
         this.pushMessage(true, { title: "移除" });

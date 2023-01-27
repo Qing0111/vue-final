@@ -58,7 +58,7 @@
                   {{ item.origin_price }} 元
                 </p>
                 <p class="card-text" v-if="item.price">
-                  NT${{ item.origin_price }}
+                  NT$ {{ item.origin_price }}
                 </p>
                 <div class="group">
                   <div
@@ -191,6 +191,7 @@
 @media (min-width: 768px) {
   .main-product {
     padding: 60px 20px;
+
     .list {
       h2 {
         font-size: 24px;
@@ -198,6 +199,9 @@
         color: #54433c;
       }
       ul {
+        position: sticky;
+        top: 106px;
+        left: 0;
         border: 1px solid #c8a472;
         box-shadow: 1px 1px 2px #967b55;
         display: block;
@@ -271,9 +275,6 @@ export default {
         },
         {
           title: "兔子",
-        },
-        {
-          title: "牧草",
         },
         {
           title: "飼料",

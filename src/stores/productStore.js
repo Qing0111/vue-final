@@ -19,7 +19,7 @@ export default defineStore("productStore", {
       status.isLoading = true;
       axios.get(url).then((res) => {
         this.products = res.data.products;
-        console.log("products:", res);
+        // console.log("products:", res);
         status.isLoading = false;
       });
     },

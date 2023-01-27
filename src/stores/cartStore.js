@@ -12,17 +12,17 @@ export default defineStore("cartStore", {
   },
 
   actions: {
-    addToCart(id) {
+    addToCart(id, qty = 1) {
       // console.log(id);
       status.cartLoading = id;
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: id,
-        qty: 1,
+        qty,
       };
       axios.post(url, { data: cart }).then((res) => {
         status.cartLoading = "";
-        console.log(res.data);
+        // console.log(res.data);
         status.pushMessage(res.data.success, { title: "加入購物車" });
         this.getCart();
       });
@@ -31,19 +31,19 @@ export default defineStore("cartStore", {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       status.isLoading = true;
       axios.get(url).then((res) => {
-        console.log(res.data.data.carts);
-        this.cart = res.data.data.carts;
+        console.log("card", res.data.data);
+        this.cart = res.data.data;
         status.isLoading = false;
       });
     },
-    updateCart(item) {
-      // console.log(item);
+    updateCart(item, qty) {
+      console.log(item);
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
       // status.isLoading = true;
       status.cartLoading = item.id;
       const cart = {
         product_id: item.product_id,
-        qty: item.qty,
+        qty: qty,
       };
       axios.put(url, { data: cart }).then((res) => {
         // console.log(res);

@@ -1,6 +1,15 @@
 <template>
   <div>
-    <Loading :active="isLoading"></Loading>
+    <Loading :active="isLoading">
+      <div class="loadingio-spinner-double-ring-juf8237g2sc">
+        <div class="ldio-1prs6fceeog">
+          <div></div>
+          <div></div>
+          <div><div></div></div>
+          <div><div></div></div>
+        </div>
+      </div>
+    </Loading>
     <div class="text-end mt-4">
       <button class="btn btn-primary" @click="openCouponModal(true)">
         建立新的優惠券

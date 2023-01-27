@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky-top">
+  <header>
     <section class="discount">
       <p>輸入優惠碼 : 52rabbit，可享有8折優惠!</p>
     </section>
@@ -12,8 +12,8 @@
         <ul>
           <li>
             <a
-              href="/"
-              @click="toggleBurger"
+              href="#/"
+              @click="removeBurger"
               :class="{ active: this.$route.path == '/' }"
               >首頁</a
             >
@@ -21,7 +21,7 @@
           <li>
             <a
               href="#/products?category=全部"
-              @click="toggleBurger"
+              @click="removeBurger"
               :class="{ active: this.$route.path == '/products' }"
               >商品</a
             >
@@ -30,7 +30,7 @@
       </nav>
 
       <div class="logo">
-        <h1><a href="#/" id="">RabbitFamily</a></h1>
+        <h1><a href="#/">RabbitFamily</a></h1>
       </div>
       <ul class="collect-shop">
         <li>
@@ -52,8 +52,8 @@
           <a href="#/cart" :class="{ active: this.$route.path == '/cart' }"
             ><i class="bi bi-cart3"></i
           ></a>
-          <article class="text-white" v-if="cart.length">
-            {{ cart.length }}
+          <article class="text-white" v-if="cart.total">
+            {{ cart.carts.length }}
           </article>
         </li>
       </ul>
@@ -67,7 +67,9 @@
 header {
   width: 100%;
   background-color: #54433c;
-
+  position: sticky;
+  top: 0;
+  z-index: 10;
   .discount {
     background-color: #f9ba37;
     padding: 4px 0px;
@@ -316,6 +318,11 @@ export default {
       this.$refs.nav.classList.toggle("active");
       this.$refs.burger.classList.toggle("none");
       this.$refs.cross.classList.toggle("block");
+    },
+    removeBurger() {
+      this.$refs.nav.classList.remove("active");
+      this.$refs.burger.classList.remove("none");
+      this.$refs.cross.classList.remove("block");
     },
   },
   created() {

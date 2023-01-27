@@ -1,5 +1,14 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+    <Loading :active="isLoading">
+    <div class="loadingio-spinner-double-ring-juf8237g2sc">
+      <div class="ldio-1prs6fceeog">
+        <div></div>
+        <div></div>
+        <div><div></div></div>
+        <div><div></div></div>
+      </div>
+    </div>
+  </Loading>
   <table class="table mt-4">
     <thead>
       <tr>

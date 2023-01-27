@@ -408,14 +408,11 @@
       bottom: -8px;
     }
   }
-  .swiper {
-    // overflow: ;
-  }
   .swiper-wrapper {
     height: 100%;
     .swiper-slide {
       .card {
-        height: 240px;
+        height: 252px;
         .card-title {
           font-size: 18px;
         }
@@ -428,7 +425,10 @@
   .swiper-button-prev,
   .swiper-button-next {
     &::after {
-      color: rgba(84, 67, 60, 0.6);
+      // color: rgba(84, 67, 60, 0.6);
+      color: rgb(233, 191, 132, 0.7);
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 12px;
     }
   }
 }
@@ -480,13 +480,12 @@
         }
       }
     }
-  }
-
-  .rabbit {
-    figure {
-      transition: transform 0.3s;
-      &:hover {
-        transform: scale(1.03);
+    .rabbit {
+      figure {
+        transition: transform 0.3s;
+        &:hover {
+          transform: scale(1.03);
+        }
       }
     }
   }

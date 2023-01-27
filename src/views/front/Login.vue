@@ -6,12 +6,12 @@
       <div class="col-md-6">
         <h1 class="h3 mb-4 font-weight-normal">後台登入</h1>
         <div class="mb-3">
-          <label for="inputEmail" class="sr-only mb-1">Email address</label>
+          <label for="inputEmail" class="sr-only mb-1">Email</label>
           <input
             type="email"
             id="inputEmail"
             class="form-control"
-            placeholder="Email address"
+            placeholder="Email"
             required
             autofocus
             v-model="user.username"

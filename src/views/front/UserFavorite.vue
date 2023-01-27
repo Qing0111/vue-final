@@ -56,7 +56,9 @@
     >
       <article class="h-100">
         <h2>目前您的收藏沒有任何商品!</h2>
-        <a href="#/Products" class="btn btn-yellow text-white">來去購物</a>
+        <a href="#/products?category=全部" class="btn btn-yellow text-white"
+          >來去購物</a
+        >
       </article>
     </section>
   </main>
