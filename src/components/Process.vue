@@ -1,26 +1,42 @@
 <template>
   <section class="process">
     <article>
-      <h2
-        :class="{
-          active:
-            this.$route.path == '/cart' || this.$route.path == '/checkout' || this.$route.path ==  `/checkout/${itemId}`
-        }"
-      >
-        1
-      </h2>
+      <h2 class="active">1</h2>
       <p>購物車</p>
     </article>
     <article>
-      <h2 :class="{ active: this.$route.path == '/checkout' || this.$route.path ==  `/checkout/${itemId}` }">2</h2>
+      <h2
+        :class="{
+          active:
+            this.$route.path == '/checkout' ||
+            this.$route.path == `/checkout/${orderId}` ||
+            this.$route.path == `/orderCompleted/${orderId}`,
+        }"
+      >
+        2
+      </h2>
       <p>填寫資料</p>
     </article>
     <article>
-      <h2 :class="{active: this.$route.path ==  `/checkout/${itemId}`}">3</h2>
+      <h2
+        :class="{
+          active:
+            this.$route.path == `/checkout/${orderId}` ||
+            this.$route.path == `/orderCompleted/${orderId}`,
+        }"
+      >
+        3
+      </h2>
       <p>確認訂單</p>
     </article>
     <article>
-      <h2>4</h2>
+      <h2
+        :class="{
+          active: this.$route.path == `/orderCompleted/${orderId}`,
+        }"
+      >
+        4
+      </h2>
       <p>完成訂單</p>
     </article>
   </section>
@@ -70,6 +86,12 @@
         border-bottom: 2px solid #000;
       }
     }
+    &:last-child h2.active {
+      border-style: solid;
+      &::after {
+        border-bottom: 2px solid #000;
+      }
+    }
   }
 }
 @media (min-width: 576px) {
@@ -91,10 +113,10 @@
 </style>
 
 <script>
-  export default{
-    props: ['itemId'],
-    created() {
-      console.log(this.itemId);
-    },
-  }
+export default {
+  props: ["orderId"],
+  created() {
+    // console.log(this.orderId);
+  },
+};
 </script>

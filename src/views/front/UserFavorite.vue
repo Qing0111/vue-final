@@ -27,7 +27,13 @@
         </ol>
       </nav>
       <template v-for="(item, key) in favoriteProduct" :key="key">
-        <div class="card-favorite">
+        <div
+          class="card-favorite"
+          data-aos="fade-up"
+          data-aos-once="true"
+          data-aos-duration="800"
+          data-aos-offset="0"
+        >
           <div class="pic">
             <img :src="item.product.imageUrl" alt="產品圖片" />
           </div>
@@ -170,6 +176,9 @@ import statusStore from "@/stores/statusStore";
 import localFavorite from "@/mixins/localFavorite";
 import emitter from "@/methods/emitter";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 export default {
   data() {
     return {
@@ -212,6 +221,7 @@ export default {
     emitter.on("updateFavorite", () => {
       this.favoriteItems = this.getLocalFavorite();
     });
+    AOS.init({});
   },
 };
 </script>

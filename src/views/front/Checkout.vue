@@ -9,9 +9,9 @@
             <thead class="bg-brown-deep text-white">
               <tr>
                 <!-- <th scope="col" class="py-3" width="10%">圖片</th> -->
-                <th scope="col" class="py-3" width="30%">產品</th>
-                <th scope="col" width="16%">數量</th>
-                <th scope="col" width="34%">金額</th>
+                <th scope="col" class="py-3" width="40%">產品</th>
+                <th scope="col" width="20%">數量</th>
+                <th scope="col" width="40%">金額</th>
               </tr>
             </thead>
             <tbody>
@@ -37,7 +37,9 @@
                   </div> -->
 
                   <td class="align-middle">
-                    <p>{{ item.qty }}</p>
+                    <p>
+                      {{ item.qty }}/{{ item.product.unit }}
+                    </p>
                   </td>
                   <td class="align-middle">
                     NT$ {{ $filters.currency(item.final_total) }}
@@ -222,7 +224,6 @@ export default {
         this.$router.push(`/checkout/${res.data.orderId}`);
       });
     },
-
   },
   mounted() {
     this.getCart();

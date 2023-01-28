@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="isLoading">
+    <Loading :active="isLoading">
     <div class="loadingio-spinner-double-ring-juf8237g2sc">
       <div class="ldio-1prs6fceeog">
         <div></div>
@@ -9,9 +9,12 @@
       </div>
     </div>
   </Loading>
-  <main class="container-md user-checkout">
+  <main class="container-md order-completed">
     <process :orderId="orderId"></process>
-    <section class="row justify-content-center check">
+    <section class="row justify-content-center finish">
+      <h2 class="fs-4 f-bold text-center mb-3">
+        您的購買已完成，感謝您的購買!
+      </h2>
       <form class="col-md-6" @submit.prevent="payOrder">
         <table class="table mb-0">
           <thead class="bg-brown-deep text-white">
@@ -69,19 +72,28 @@
             </tr>
           </tfoot>
         </table>
-        <div class="text-end">
-          <button class="btn btn-outline-brown-deep">結帳</button>
-        </div>
+        <article class="d-flex justify-content-between">
+          <a href="#/" class="btn btn-brown-deep">回到首頁</a>
+          <a href="#/products?category=全部" class="btn btn-outline-brown-deep"
+            >繼續購物</a
+          >
+        </article>
       </form>
     </section>
   </main>
 </template>
 
 <style lang="scss">
-.user-checkout {
-  min-height: calc(100vh - 158px);
+.order-completed {
   padding: 60px 20px;
-  .check {
+  min-height: calc(100vh - 158px);
+  .finish {
+    // margin-top: 120px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+
     form {
       .table {
         margin-bottom: 28px;
@@ -100,9 +112,7 @@
 <script>
 import process from "@/components/Process.vue";
 import { mapState, mapActions } from "pinia";
-
 import statusStore from "@/stores/statusStore";
-const status = statusStore();
 
 export default {
   components: {
@@ -114,16 +124,6 @@ export default {
         user: {},
       },
       orderId: "",
-
-      form: {
-        user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: "",
-        },
-        message: "",
-      },
     };
   },
   computed: {
@@ -137,27 +137,6 @@ export default {
           console.log(res.data.order);
           this.order = res.data.order;
         }
-      });
-    },
-    payOrder() {
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
-      status.Loading = true;
-      this.$http.post(url).then((res) => {
-        console.log(res);
-        if (res.data.success) {
-          status.Loading = false;
-          this.getOrder();
-          this.$router.push(`/orderCompleted/${this.orderId}`);
-        }
-      });
-    },
-    createOrder() {
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
-      const order = this.form;
-      this.$http.post(url, { data: order }).then((res) => {
-        console.log(res.data.orderId);
-        this.getCart();
-        this.$router.push(`/checkout/${res.data.orderId}`);
       });
     },
   },

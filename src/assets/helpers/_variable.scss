@@ -323,6 +323,7 @@ $theme-colors: (
   "dark": $dark,
   "yellow": #c8a472,
   "brown-deep": #54433c,
+  "yellow-deep": #9e805a,
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -713,6 +714,8 @@ $table-variants: (
   "danger": shift-color($danger, $table-bg-scale),
   "light": $light,
   "dark": $dark,
+  "yellow": #c8a472,
+  "brown-deep": #54433c,
 ) !default;
 // scss-docs-end table-loop
 

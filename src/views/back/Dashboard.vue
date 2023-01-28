@@ -1,10 +1,19 @@
 <template>
   <NavbarBack></NavbarBack>
-  <div class="container-fluid mt-3 position-relative">
+  <div class="container-fluid position-relative">
     <ToastMessages></ToastMessages>
-    <router-view />
   </div>
+  <router-view />
 </template>
+
+
+<style lang="scss">
+.back {
+  min-height: calc(100vh - 60px);
+  padding: 60px 20px;
+}
+</style>
+
 
 <script>
 import emitter from "@/methods/emitter";

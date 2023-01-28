@@ -10,8 +10,8 @@
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <div class="modal-header bg-brown-deep text-white">
+          <h5 class="modal-title" id="exampleModalLabel">新增優惠券</h5>
           <button
             type="button"
             class="btn-close"
@@ -78,14 +78,14 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-secondary"
+            class="btn btn-yellow-deep text-white"
             data-bs-dismiss="modal"
           >
             Close
           </button>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-yellow text-white"
             @click="$emit('update-coupon', tempCoupon)"
           >
             更新優惠券

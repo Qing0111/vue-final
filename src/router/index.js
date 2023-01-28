@@ -35,6 +35,10 @@ const routes = [
         path: "checkout/:orderId",
         component: () => import("../views/front/UserCheckout.vue"),
       },
+      {
+        path: "orderCompleted/:orderId",
+        component: () => import("../views/front/OrderCompleted.vue"),
+      }
     ],
   },
   {

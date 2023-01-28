@@ -30,7 +30,7 @@
       </ol>
     </nav>
     <section class="row justify-content-center product-detail">
-      <article class="col-md-6">
+      <article class="col-md-6 mb-3">
         <!-- <img :src="product.imageUrl" alt="商品圖" class="img-fluid mb-3" /> -->
         <swiper
           ref="{swiperRef}"
@@ -87,35 +87,46 @@
 
         <article class="mb-4">
           <!-- <p>{{ product.content }}</p> -->
-          <p class="description">{{ product.description }}</p>
+          <p class="description">
+            {{ product.description }}
+          </p>
         </article>
-        <article class="d-flex justify-content-between align-items-center">
-          <div class="input-group">
+        <article class="">
+          <div class="input-group mb-3">
+            <button class="btn btn-yellow-deep text-white fs-5" @click="reduce">
+              -
+            </button>
             <input
               type="number"
-              class="form-control"
+              class="form-control text-center"
               min="1"
               v-model.number="num"
-              style="width: 72px"
             />
-            <button
-              type="button"
-              class="btn btn-yellow text-white"
-              @click="addToCart(product.id, num)"
-            >
-              加到購物車
+            <button class="btn btn-yellow-deep text-white fs-5" @click="add">
+              +
             </button>
           </div>
-          <div class="heart text-danger p-3" @click="toggleFavorite(id)">
-            <i
-              class="bi fs-3 text-yellow"
-              :class="[
-                favoriteItems.includes(id)
-                  ? 'bi-suit-heart-fill'
-                  : 'bi-suit-heart',
-              ]"
-            ></i>
-          </div>
+          <article class="d-flex align-items-center gap-3">
+            <button
+              type="button"
+              class="btn btn-yellow text-white w-50"
+              @click="addToCart(product.id, num)"
+            >
+              加入購物車
+            </button>
+            <button
+              class="heart btn w-50"
+              @click="toggleFavorite(id)"
+              :class="{ active: favoriteItems.includes(product.id) }"
+            >
+              <i
+                class="bi bi-suit-heart-fill"
+                v-if="favoriteItems.includes(product.id)"
+              ></i>
+              <i class="bi bi-suit-heart" v-else></i
+              ><span class="ms-1">加入收藏</span>
+            </button>
+          </article>
         </article>
       </article>
     </section>
@@ -125,7 +136,6 @@
         ref="{swiperRef}"
         :slidesPerView="1"
         :spaceBetween="30"
-        :loop="true"
         :navigation="true"
         :breakpoints="{ 768: { slidesPerView: 3 } }"
         class="mySwiper"
@@ -158,17 +168,15 @@
                     <i class="bi bi-cart3"></i>
                   </div>
                   <div
-                    class="heart text-danger"
+                    class="heart"
                     @click="toggleFavorite(item.id)"
+                    :class="{ active: favoriteItems.includes(item.id) }"
                   >
                     <i
-                      class="bi"
-                      :class="[
-                        favoriteItems.includes(item.id)
-                          ? 'bi-suit-heart-fill'
-                          : 'bi-suit-heart',
-                      ]"
+                      class="bi bi-suit-heart-fill"
+                      v-if="favoriteItems.includes(item.id)"
                     ></i>
+                    <i class="bi bi-suit-heart" v-else></i>
                   </div>
                 </div>
               </div>
@@ -191,20 +199,46 @@
       height: 320px;
       object-fit: cover;
     }
-    .mySwiper .swiper-slide {
-      width: 80px !important;
-      img {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
+    .mySwiper {
+      .swiper-slide {
+        width: 80px !important;
+        img {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          cursor: pointer;
+        }
       }
     }
     .description {
       word-break: keep-all;
       word-wrap: break-word;
+      line-height: 1.5;
     }
-    .bi {
+    input[type="number"] {
+      -moz-appearance: textfield;
+      box-shadow: inset 1px 1px 1px rgb(236, 236, 236);
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .heart {
       cursor: pointer;
+      border: 1px solid #c8a472;
+      padding: 6px;
+      // border-radius: 4px;
+      color: #c8a472;
+      &:hover,
+      &.active {
+        background-color: #c8a472;
+        color: #fff;
+      }
+      i {
+        font-size: 16px;
+      }
     }
   }
 
@@ -226,14 +260,6 @@
       }
     }
 
-    .swiper-button-prev,
-    .swiper-button-next {
-      &::after {
-        color: #e9bf84;
-        background-color: rgba(0, 0, 0, 0.3);
-        padding: 12px;
-      }
-    }
     .product-card {
       box-shadow: 1px 1px 2px #ccc;
       transition: box-shadow 0.5s;
@@ -276,15 +302,40 @@
     }
     .shop {
       cursor: pointer;
+      border: 1px solid #c8a472;
+      padding: 6px;
+      border-radius: 50%;
+      color: #c8a472;
+      &:hover {
+        background-color: #c8a472;
+        color: #fff;
+      }
       i {
         font-size: 20px;
       }
     }
     .heart {
       cursor: pointer;
+      border: 1px solid #c8a472;
+      padding: 6px;
+      border-radius: 50%;
+      color: #c8a472;
+      &:hover,
+      &.active {
+        background-color: #c8a472;
+        color: #fff;
+      }
       i {
         font-size: 20px;
-        color: #c8a472;
+      }
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      &::after {
+        color: rgb(233, 191, 132, 0.7);
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 12px;
       }
     }
   }
@@ -333,14 +384,11 @@ import localFavorite from "@/mixins/localFavorite";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 
-import SwiperCore, {
-  Pagination,
-  Navigation,
-  Thumbs,
-} from "swiper/core";
+import SwiperCore, { Pagination, Navigation, Thumbs } from "swiper/core";
 
 SwiperCore.use([Pagination, Navigation, Thumbs]);
 
@@ -385,10 +433,10 @@ export default {
 
     getProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
-      this.isLoading = true;
+      // this.isLoading = true;
       this.$http.get(api).then((response) => {
         console.log(response.data);
-        this.isLoading = false;
+        // this.isLoading = false;
         if (response.data.success) {
           this.product = response.data.product;
         }
@@ -396,6 +444,14 @@ export default {
     },
     setThumbsSwiper(swiper) {
       this.thumbsSwiper = swiper;
+    },
+    reduce() {
+      if (this.num > 1) {
+        this.num--;
+      }
+    },
+    add() {
+      this.num++;
     },
     // addToCart(id, qty = 1) {
     //   const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;

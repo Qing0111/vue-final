@@ -37,7 +37,13 @@
       </swiper>
     </section>
     <div class="container-md">
-      <section class="main-content">
+      <section
+        class="main-content"
+        data-aos="fade-up"
+        data-aos-once="true"
+        data-aos-duration="1000"
+        data-aos-offset="0"
+      >
         <section class="product-commodity">
           <a href="#/products?category=飼料">
             <figure>
@@ -61,7 +67,14 @@
         <section class="new-product">
           <h2>兔用新品</h2>
           <div class="row g-3">
-            <div class="col-md-4" v-for="item in filterData" :key="item.id">
+            <div
+              class="col-md-4"
+              v-for="item in filterData"
+              :key="item.id"
+              data-aos="fade-up"
+              data-aos-once="true"
+              data-aos-duration="1000"
+            >
               <article class="card product-card">
                 <router-link :to="`/product/${item.id}`">
                   <div class="pic">
@@ -86,17 +99,15 @@
                       <i class="bi bi-cart3"></i>
                     </div>
                     <div
-                      class="heart text-danger"
+                      class="heart"
                       @click="toggleFavorite(item.id)"
+                      :class="{ active: favoriteItems.includes(item.id) }"
                     >
                       <i
-                        class="bi"
-                        :class="[
-                          favoriteItems.includes(item.id)
-                            ? 'bi-suit-heart-fill'
-                            : 'bi-suit-heart',
-                        ]"
+                        class="bi bi-suit-heart-fill"
+                        v-if="favoriteItems.includes(item.id)"
                       ></i>
+                      <i class="bi bi-suit-heart" v-else></i>
                     </div>
                   </div>
                 </div>
@@ -104,7 +115,12 @@
             </div>
           </div>
         </section>
-        <section class="rabbit">
+        <section
+          class="rabbit"
+          data-aos="fade-up"
+          data-aos-once="true"
+          data-aos-duration="1000"
+        >
           <a href="#/products?category=兔子">
             <figure>
               <img src="@/assets/image/rabbit.jpg" alt="" />
@@ -126,6 +142,9 @@
             :navigation="true"
             :breakpoints="{ 768: { slidesPerView: 2 } }"
             class="mySwiper"
+            data-aos="fade-up"
+            data-aos-once="true"
+            data-aos-duration="1000"
           >
             <template v-for="(item, key) in introduce" :key="key">
               <swiper-slide>
@@ -145,13 +164,23 @@
     </div>
 
     <section class="information">
-      <article class="contact">
+      <article
+        class="contact"
+        data-aos="fade-up"
+        data-aos-once="true"
+        data-aos-duration="1000"
+      >
         <h3>聯絡我們</h3>
         <p>地址 : 台中市兔子家族</p>
         <p>連絡電話 : 04-12345678</p>
         <p>信箱 : rabbit_family@gmail.com</p>
       </article>
-      <article class="follow">
+      <article
+        class="follow"
+        data-aos="fade-up"
+        data-aos-once="true"
+        data-aos-duration="1000"
+      >
         <h3>關注我們</h3>
         <article>
           <div class="fb">
@@ -280,6 +309,7 @@
   @media (min-width: 768px) {
     padding: 20px;
   }
+  
   .new-product {
     margin-bottom: 40px;
     h2 {
@@ -339,15 +369,31 @@
     }
     .shop {
       cursor: pointer;
+      border: 1px solid #c8a472;
+      padding: 6px;
+      border-radius: 50%;
+      color: #c8a472;
+      &:hover {
+        background-color: #c8a472;
+        color: #fff;
+      }
       i {
         font-size: 20px;
       }
     }
     .heart {
       cursor: pointer;
+      border: 1px solid #c8a472;
+      padding: 6px;
+      border-radius: 50%;
+      color: #c8a472;
+      &:hover,
+      &.active {
+        background-color: #c8a472;
+        color: #fff;
+      }
       i {
         font-size: 20px;
-        color: #c8a472;
       }
     }
   }
@@ -571,6 +617,8 @@ import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
 import localFavorite from "@/mixins/localFavorite";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -648,6 +696,7 @@ export default {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH);
     this.getProducts();
     this.getCart();
+    AOS.init({});
   },
 };
 </script>

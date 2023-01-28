@@ -1,6 +1,6 @@
 <template>
   <Loading :active="isLoading"></Loading>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-brown-deep">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-brown-deep py-3">
     <div class="container-fluid back-title">
       <h2>
         <a class="navbar-brand">RabbitFamily後台管理</a>

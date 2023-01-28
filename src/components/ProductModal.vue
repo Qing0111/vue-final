@@ -11,7 +11,7 @@
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
-        <div class="modal-header bg-dark text-white">
+        <div class="modal-header bg-brown-deep text-white">
           <h5 class="modal-title" id="exampleModalLabel">
             <span>新增產品</span>
           </h5>
@@ -73,11 +73,12 @@
                 <div
                   v-if="
                     (tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1] ||
-                    !tempProduct.imagesUrl.length) && tempProduct.imagesUrl.length < 5
+                      !tempProduct.imagesUrl.length) &&
+                    tempProduct.imagesUrl.length < 5
                   "
                 >
                   <button
-                    class="btn btn-outline-primary btn-sm d-block w-100"
+                    class="btn btn-yellow text-white btn-sm d-block w-100"
                     @click="tempProduct.imagesUrl.push('')"
                   >
                     新增圖片
@@ -185,14 +186,14 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-yellow-deep text-white"
             data-bs-dismiss="modal"
           >
             取消
           </button>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-yellow text-white"
             @click="$emit('update-product', tempProduct)"
           >
             確認

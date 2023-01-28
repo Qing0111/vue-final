@@ -44,6 +44,10 @@
             class="col-sm-6 col-lg-4"
             v-for="item in productCategory"
             :key="item.id"
+            data-aos="fade-up"
+            data-aos-once="true"
+            data-aos-duration="800"
+            data-aos-offset="0"
           >
             <article class="card product-card">
               <router-link :to="`/product/${item.id}`">
@@ -62,7 +66,7 @@
                 </p>
                 <div class="group">
                   <div
-                    class="text-yellow shop"
+                    class="shop"
                     @click="addToCart(item.id)"
                     :disabled="cartLoading == item.id"
                   >
@@ -75,17 +79,15 @@
                     <i class="bi bi-cart3"></i>
                   </div>
                   <div
-                    class="heart text-danger"
+                    class="heart"
                     @click="toggleFavorite(item.id)"
+                    :class="{ active: favoriteItems.includes(item.id) }"
                   >
                     <i
-                      class="bi"
-                      :class="[
-                        favoriteItems.includes(item.id)
-                          ? 'bi-suit-heart-fill'
-                          : 'bi-suit-heart',
-                      ]"
+                      class="bi bi-suit-heart-fill"
+                      v-if="favoriteItems.includes(item.id)"
                     ></i>
+                    <i class="bi bi-suit-heart" v-else></i>
                   </div>
                 </div>
               </div>
@@ -114,8 +116,6 @@
       gap: 8px;
     }
     li {
-      border: 1px solid #c8a472;
-      border-radius: 50px;
       a {
         text-decoration: none;
         display: inline-block;
@@ -123,10 +123,23 @@
         color: #000;
         font-size: 16px;
         padding: 10px;
+        border: 1px solid #c8a472;
+        box-shadow: 1px 1px 1px #927853;
+        border-radius: 50px;
+
+        &:hover {
+          background-color: #dfcaac;
+          color: #fff;
+          border: 1px solid #dfcaac;
+          // border-radius: 50px;
+          box-shadow: none;
+        }
         &.active {
           background-color: #c8a472;
+          border: 1px solid #c8a472;
           color: #fff;
-          border-radius: 50px;
+          box-shadow: none;
+          // border-radius: 50px;
         }
       }
     }
@@ -175,15 +188,31 @@
     }
     .shop {
       cursor: pointer;
+      border: 1px solid #c8a472;
+      padding: 6px;
+      border-radius: 50%;
+      color: #c8a472;
+      &:hover {
+        background-color: #c8a472;
+        color: #fff;
+      }
       i {
         font-size: 20px;
       }
     }
     .heart {
       cursor: pointer;
+      border: 1px solid #c8a472;
+      padding: 6px;
+      border-radius: 50%;
+      color: #c8a472;
+      &:hover,
+      &.active {
+        background-color: #c8a472;
+        color: #fff;
+      }
       i {
         font-size: 20px;
-        color: #c8a472;
       }
     }
   }
@@ -203,19 +232,25 @@
         top: 106px;
         left: 0;
         border: 1px solid #c8a472;
-        box-shadow: 1px 1px 2px #967b55;
+        // box-shadow: 1px 1px 1px #927853;
         display: block;
+        border-radius: 4px;
+        overflow: hidden;
       }
       li {
-        border: 0;
         border-bottom: 1px solid #c8a472;
-        border-radius: 0px;
         &:last-child {
           border-bottom: 0;
         }
         a {
+          border: 0;
+          box-shadow: none;
+          border-radius: 0px;
           padding: 12px;
-          &.active {
+
+          &.active,
+          &:hover {
+            border: none;
             border-radius: 0px;
           }
         }
@@ -253,6 +288,9 @@ import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
 import localFavorite from "@/mixins/localFavorite";
 import Pagination from "@/components/Pagination.vue";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default {
   components: {
@@ -345,6 +383,7 @@ export default {
     this.getProducts();
     this.getCart();
     this.tabState = this.$route.query.category || "全部";
+    AOS.init({});
   },
 };
 </script>
