@@ -114,14 +114,11 @@ export default {
     return {
       coupons: {},
       tempCoupon: {},
-      // isLoading: false,
+      isLoading: false,
       isNew: false,
       pagination: {},
       currentPage: 1,
     };
-  },
-  computed: {
-    ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
   methods: {
     ...mapActions(statusStore, ["pushMessage"]),
@@ -164,7 +161,7 @@ export default {
       }
       this.$http[httpMethod](url, { data: tempCoupon }).then((res) => {
         console.log(res);
-        this.pushMessage(res.data.success, {title:"新增優惠券"});
+        this.pushMessage(res.data.success, {title:"編輯"});
         this.getCoupons();
         this.$refs.couponModal.hideModal();
       });

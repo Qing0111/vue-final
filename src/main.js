@@ -18,7 +18,7 @@ import zhTW from "@vee-validate/i18n/dist/locale/zh_TW.json";
 import App from "./App.vue";
 import router from "./router";
 import { currency, date } from "./methods/filter";
-import $httpMessageState from "./methods/pushMessageState";
+// import $httpMessageState from "./methods/pushMessageState";
 const pinia = createPinia();
 const app = createApp(App);
 app.config.globalProperties.$filters = {
@@ -38,7 +38,7 @@ configure({
 // 設定預設語系
 setLocale("zh_TW");
 
-app.config.globalProperties.$httpMessageState = $httpMessageState;
+// app.config.globalProperties.$httpMessageState = $httpMessageState;
 app.use(VueAxios, axios);
 app.use(router);
 app.use(pinia);

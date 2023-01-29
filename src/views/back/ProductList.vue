@@ -123,7 +123,7 @@ export default {
       pagination: {},
       tempProduct: {},
       isNew: false,
-      // isLoading: false,
+      isLoading: false,
     };
   },
   inject: ["emitter"],
@@ -133,7 +133,7 @@ export default {
     Pagination,
   },
   computed: {
-    ...mapState(statusStore, ["isLoading", "cartLoading"]),
+    // ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
   methods: {
     ...mapActions(statusStore, ["pushMessage"]),
@@ -157,12 +157,12 @@ export default {
     delProduct() {
       console.log(this.tempProduct);
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
-      // this.isLoading = true;
+      this.isLoading = true;
       this.$http.delete(api).then((res) => {
-        // this.isLoading = false;
+        this.isLoading = false;
         this.$refs.DelModal.hideModal();
         this.getProducts();
-        this.pushMessage(res.data.success, { title:{title:"刪除"} });
+        this.pushMessage(res.data.success, { title: "刪除" });
       });
     },
     openModal(isNew, item) {
@@ -185,25 +185,13 @@ export default {
         api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`;
         httpMethod = "put";
       }
-      // this.isLoading = true;
+      this.isLoading = true;
       this.$http[httpMethod](api, { data: this.tempProduct }).then((res) => {
         // console.log(res);
-        // this.isLoading = false;
+        this.isLoading = false;
         this.$refs.productModal.hideModal();
-        this.pushMessage(res.data.success, { title: {title:"更新"} });
-        // if (res.data.success) {
-        //   this.getProducts();
-        //   this.emitter.emit("push-message", {
-        //     style: "success",
-        //     title: "更新成功",
-        //   });
-        // } else {
-        //   this.emitter.emit("push-message", {
-        //     style: "danger",
-        //     title: "更新失敗",
-        //     content: res.data.message.join("、"),
-        //   });
-        // }
+        this.getProducts();
+        this.pushMessage(res.data.success, { title: "編輯" });
       });
     },
   },

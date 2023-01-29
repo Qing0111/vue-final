@@ -92,7 +92,7 @@
                   </p>
                   <div class="group">
                     <div
-                      class="text-yellow shop"
+                      class="shop"
                       @click="addToCart(item.id)"
                       :disabled="cartLoading == item.id"
                     >
@@ -184,13 +184,13 @@
         <h3>關注我們</h3>
         <article>
           <div class="fb">
-            <a href="#">
+            <a href="#/">
               <i class="bi bi-facebook"></i>
               <span>Facebook</span>
             </a>
           </div>
           <div class="ig">
-            <a href="#">
+            <a href="#/">
               <i class="bi bi-instagram"></i>
               <span>Instagram</span>
             </a>
@@ -309,7 +309,7 @@
   @media (min-width: 768px) {
     padding: 20px;
   }
-  
+
   .new-product {
     margin-bottom: 40px;
     h2 {
@@ -673,8 +673,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(productStore, ["products", "State"]),
-    ...mapState(cartStore, ["cart"]),
+    ...mapState(productStore, ["products"]),
     ...mapState(statusStore, ["isLoading", "cartLoading"]),
 
     filterData() {

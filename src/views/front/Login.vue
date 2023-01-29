@@ -1,5 +1,14 @@
 <template>
-  <!-- <Loading :active="isLoading"></Loading> -->
+  <Loading :active="isLoading">
+    <div class="loadingio-spinner-double-ring-juf8237g2sc">
+      <div class="ldio-1prs6fceeog">
+        <div></div>
+        <div></div>
+        <div><div></div></div>
+        <div><div></div></div>
+      </div>
+    </div>
+  </Loading>
   <Navbar></Navbar>
   <main class="container login">
     <form class="row justify-content-center mb-5" @submit.prevent="signIn">
@@ -66,8 +75,8 @@ export default {
       user: {
         username: "",
         password: "",
-        isLoading: false,
       },
+      isLoading: false,
     };
   },
   components: {

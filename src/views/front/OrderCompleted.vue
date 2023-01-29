@@ -1,5 +1,5 @@
 <template>
-    <Loading :active="isLoading">
+  <Loading :active="isLoading">
     <div class="loadingio-spinner-double-ring-juf8237g2sc">
       <div class="ldio-1prs6fceeog">
         <div></div>
@@ -12,7 +12,7 @@
   <main class="container-md order-completed">
     <process :orderId="orderId"></process>
     <section class="row justify-content-center finish">
-      <h2 class="fs-4 f-bold text-center mb-3">
+      <h2 class="fs-4 f-bold text-center mb-5">
         您的購買已完成，感謝您的購買!
       </h2>
       <form class="col-md-6" @submit.prevent="payOrder">
@@ -38,10 +38,17 @@
               <td>收件人電話</td>
               <td>{{ order.user.tel }}</td>
             </tr>
-            <tr class="border-0">
+            <tr>
               <td>收件人地址</td>
               <td>
                 {{ order.user.address }}
+              </td>
+            </tr>
+            <tr class="border-0">
+              <th>付款狀態</th>
+              <td>
+                <span v-if="!order.is_paid">尚未付款</span>
+                <span v-else class="text-success">付款完成</span>
               </td>
             </tr>
           </tbody>
@@ -63,18 +70,11 @@
               <td class="">訂單金額</td>
               <td class="">NT$ {{ order.total }}</td>
             </tr>
-            <tr>
-              <th>付款狀態</th>
-              <td>
-                <span v-if="!order.is_paid">尚未付款</span>
-                <span v-else class="text-success">付款完成</span>
-              </td>
-            </tr>
           </tfoot>
         </table>
         <article class="d-flex justify-content-between">
-          <a href="#/" class="btn btn-brown-deep">回到首頁</a>
-          <a href="#/products?category=全部" class="btn btn-outline-brown-deep"
+          <a href="#/" class="btn btn-yellow-deep text-white">回到首頁</a>
+          <a href="#/products?category=全部" class="btn btn-yellow text-white"
             >繼續購物</a
           >
         </article>
@@ -93,7 +93,8 @@
     // flex-direction: column;
     // justify-content: center;
     // align-items: center;
-
+    h2 {
+    }
     form {
       .table {
         margin-bottom: 28px;
@@ -111,8 +112,6 @@
 
 <script>
 import process from "@/components/Process.vue";
-import { mapState, mapActions } from "pinia";
-import statusStore from "@/stores/statusStore";
 
 export default {
   components: {
@@ -124,16 +123,17 @@ export default {
         user: {},
       },
       orderId: "",
+      isLoading: false,
     };
   },
-  computed: {
-    ...mapState(statusStore, ["isLoading", "cartLoading"]),
-  },
+
   methods: {
     getOrder() {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${this.orderId}`;
+      this.isLoading = true;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
+          this.isLoading = false;
           console.log(res.data.order);
           this.order = res.data.order;
         }

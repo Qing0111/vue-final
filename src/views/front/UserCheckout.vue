@@ -35,10 +35,17 @@
               <td>收件人電話</td>
               <td>{{ order.user.tel }}</td>
             </tr>
-            <tr class="border-0">
+            <tr>
               <td>收件人地址</td>
               <td>
                 {{ order.user.address }}
+              </td>
+            </tr>
+            <tr class="border-0">
+              <th>付款狀態</th>
+              <td>
+                <span v-if="!order.is_paid">尚未付款</span>
+                <span v-else class="text-success">付款完成</span>
               </td>
             </tr>
           </tbody>
@@ -60,17 +67,10 @@
               <td class="">訂單金額</td>
               <td class="">NT$ {{ order.total }}</td>
             </tr>
-            <tr>
-              <th>付款狀態</th>
-              <td>
-                <span v-if="!order.is_paid">尚未付款</span>
-                <span v-else class="text-success">付款完成</span>
-              </td>
-            </tr>
           </tfoot>
         </table>
         <div class="text-end">
-          <button class="btn btn-outline-brown-deep">結帳</button>
+          <button class="btn btn-yellow text-white">結帳</button>
         </div>
       </form>
     </section>
@@ -99,10 +99,6 @@
 
 <script>
 import process from "@/components/Process.vue";
-import { mapState, mapActions } from "pinia";
-
-import statusStore from "@/stores/statusStore";
-const status = statusStore();
 
 export default {
   components: {
@@ -114,7 +110,6 @@ export default {
         user: {},
       },
       orderId: "",
-
       form: {
         user: {
           name: "",
@@ -124,16 +119,16 @@ export default {
         },
         message: "",
       },
+      isLoading: false,
     };
-  },
-  computed: {
-    ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
   methods: {
     getOrder() {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${this.orderId}`;
+      this.isLoading = true;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
+          this.isLoading = false;
           console.log(res.data.order);
           this.order = res.data.order;
         }
@@ -141,23 +136,14 @@ export default {
     },
     payOrder() {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
-      status.Loading = true;
+      this.isLoading = true;
       this.$http.post(url).then((res) => {
         console.log(res);
         if (res.data.success) {
-          status.Loading = false;
+          this.isLoading = false;
           this.getOrder();
           this.$router.push(`/orderCompleted/${this.orderId}`);
         }
-      });
-    },
-    createOrder() {
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
-      const order = this.form;
-      this.$http.post(url, { data: order }).then((res) => {
-        console.log(res.data.orderId);
-        this.getCart();
-        this.$router.push(`/checkout/${res.data.orderId}`);
       });
     },
   },

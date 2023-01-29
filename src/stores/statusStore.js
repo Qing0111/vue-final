@@ -20,6 +20,9 @@ export default defineStore("statusStore", {
           content: message.join("、"),
         });
       }
+      setTimeout(() => {
+        this.messages.shift()
+      }, 1600)
     },
   },
 });

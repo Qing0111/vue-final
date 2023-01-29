@@ -10,7 +10,7 @@
   >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
-        <div class="modal-header bg-dark text-white">
+        <div class="modal-header bg-brown-deep text-white">
           <h5 class="modal-title" id="exampleModalLabel">
             <span>訂單細節</span>
           </h5>
@@ -107,14 +107,14 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-yellow-deep text-white"
             data-bs-dismiss="modal"
           >
             取消
           </button>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-yellow text-white"
             @click="$emit('update-order', tempOrder)"
           >
             確認

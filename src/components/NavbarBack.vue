@@ -1,5 +1,14 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+  <Loading :active="isLoading">
+    <div class="loadingio-spinner-double-ring-juf8237g2sc">
+      <div class="ldio-1prs6fceeog">
+        <div></div>
+        <div></div>
+        <div><div></div></div>
+        <div><div></div></div>
+      </div>
+    </div>
+  </Loading>
   <nav class="navbar navbar-expand-lg navbar-dark bg-brown-deep py-3">
     <div class="container-fluid back-title">
       <h2>

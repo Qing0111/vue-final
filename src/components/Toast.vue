@@ -29,13 +29,8 @@ import Toast from "bootstrap/js/dist/toast";
 export default {
   name: "Toast",
   props: ["msg"],
-  // created() {
-  //   console.log(this.msg);
-  // },
   mounted() {
-    const toast = new Toast(this.$refs.toast, {
-      delay: 4000,
-    });
+    const toast = new Toast(this.$refs.toast);
     toast.show();
   },
 };

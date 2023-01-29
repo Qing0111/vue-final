@@ -20,7 +20,7 @@
           </li>
           <li class="breadcrumb-item active" aria-current="page">我的收藏</li>
           <li class="ms-auto">
-            <a href="#" class="text-yellow" @click.prevent="clearLocal"
+            <a href="#" class="text-yellow" @click.prevent="openDelModal()"
               >清除全部</a
             >
           </li>
@@ -68,6 +68,10 @@
       </article>
     </section>
   </main>
+  <DelModal
+    ref="delModal"
+    @del-item="clearLocal"
+  ></DelModal>
 </template>
 
 <style lang="scss">
@@ -170,16 +174,19 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
-import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
 import localFavorite from "@/mixins/localFavorite";
 import emitter from "@/methods/emitter";
+import DelModal from "@/components/DelModal.vue";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default {
+  components: {
+    DelModal,
+  },
   data() {
     return {
       favoriteItems: this.getLocalFavorite() || [],
@@ -188,12 +195,10 @@ export default {
   },
   mixins: [localFavorite],
   computed: {
-    ...mapState(productStore, ["products", "pagination"]),
     ...mapState(cartStore, ["cart"]),
     ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
   methods: {
-    ...mapActions(productStore, ["getProducts"]),
     ...mapActions(cartStore, ["addToCart", "getCart"]),
 
     getFavoriteProduct() {
@@ -213,9 +218,11 @@ export default {
       this.toggleFavorite(id);
       this.favoriteProduct.splice(key, 1);
     },
+    openDelModal() {
+      this.$refs.delModal.showModal();
+    },
   },
   created() {
-    // this.getProducts();
     this.getCart();
     this.getFavoriteProduct();
     emitter.on("updateFavorite", () => {

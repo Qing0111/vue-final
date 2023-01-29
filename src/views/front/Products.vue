@@ -231,29 +231,31 @@
         position: sticky;
         top: 106px;
         left: 0;
-        border: 1px solid #c8a472;
+        // border: 1px solid #c8a472;
         // box-shadow: 1px 1px 1px #927853;
         display: block;
         border-radius: 4px;
-        overflow: hidden;
+        // overflow: hidden;
       }
       li {
-        border-bottom: 1px solid #c8a472;
-        &:last-child {
-          border-bottom: 0;
-        }
-        a {
-          border: 0;
-          box-shadow: none;
-          border-radius: 0px;
-          padding: 12px;
+        // border-bottom: 1px solid #c8a472;
+        margin-bottom: 8px;
+        text-align: center;
+        // &:last-child {
+        //   border-bottom: 0;
+        // }
+        // a {
+        //   border: 0;
+        //   box-shadow: none;
+        //   border-radius: 0px;
+        //   padding: 12px;
 
-          &.active,
-          &:hover {
-            border: none;
-            border-radius: 0px;
-          }
-        }
+        //   &.active,
+        //   &:hover {
+        //     border: none;
+        //     border-radius: 0px;
+        //   }
+        // }
       }
     }
     .products {
@@ -332,8 +334,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(productStore, ["products", "State"]),
-    ...mapState(cartStore, ["cart"]),
+    ...mapState(productStore, ["products"]),
     ...mapState(statusStore, ["isLoading", "cartLoading"]),
 
     filterData() {

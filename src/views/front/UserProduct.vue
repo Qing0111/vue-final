@@ -93,7 +93,11 @@
         </article>
         <article class="">
           <div class="input-group mb-3">
-            <button class="btn btn-yellow-deep text-white fs-5" @click="reduce">
+            <button
+              type="button"
+              class="btn btn-yellow-deep text-white fs-5"
+              @click="reduce"
+            >
               -
             </button>
             <input
@@ -102,7 +106,11 @@
               min="1"
               v-model.number="num"
             />
-            <button class="btn btn-yellow-deep text-white fs-5" @click="add">
+            <button
+              type="button"
+              class="btn btn-yellow-deep text-white fs-5"
+              @click="add"
+            >
               +
             </button>
           </div>
@@ -115,6 +123,7 @@
               加入購物車
             </button>
             <button
+              type="button"
               class="heart btn w-50"
               @click="toggleFavorite(id)"
               :class="{ active: favoriteItems.includes(product.id) }"

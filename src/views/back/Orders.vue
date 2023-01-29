@@ -127,6 +127,7 @@ export default {
     return {
       orders: {},
       isNew: false,
+      isLoading: false,
       pagination: {},
       tempOrder: {},
       currentPage: 1,
@@ -138,7 +139,7 @@ export default {
     OrderModal,
   },
   computed: {
-    ...mapState(statusStore, ["isLoading", "cartLoading"]),
+    // ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
   methods: {
     ...mapActions(statusStore, ["pushMessage"]),
@@ -146,11 +147,11 @@ export default {
     getOrders(currentPage = 1) {
       this.currentPage = currentPage;
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}`;
-      // this.isLoading = true;
+      this.isLoading = true;
       this.$http.get(url, this.tempProduct).then((res) => {
         this.orders = res.data.orders;
         this.pagination = res.data.pagination;
-        // this.isLoading = false;
+        this.isLoading = false;
         console.log(res);
       });
     },
@@ -173,7 +174,7 @@ export default {
         // this.isLoading = false;
         this.getOrders(this.currentPage);
         this.$refs.orderModal.hideModal();
-        this.pushMessage(res.data.success, { title: "更新付款狀態" });
+        this.pushMessage(res.data.success, { title: "編輯" });
       });
     },
     delOrder() {

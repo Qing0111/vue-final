@@ -1,4 +1,14 @@
 <template>
+  <Loading :active="isLoading">
+    <div class="loadingio-spinner-double-ring-juf8237g2sc">
+      <div class="ldio-1prs6fceeog">
+        <div></div>
+        <div></div>
+        <div><div></div></div>
+        <div><div></div></div>
+      </div>
+    </div>
+  </Loading>
   <main class="container-md checkout">
     <process></process>
     <section class="row">
@@ -37,9 +47,7 @@
                   </div> -->
 
                   <td class="align-middle">
-                    <p>
-                      {{ item.qty }}/{{ item.product.unit }}
-                    </p>
+                    <p>{{ item.qty }}/{{ item.product.unit }}</p>
                   </td>
                   <td class="align-middle">
                     NT$ {{ $filters.currency(item.final_total) }}
@@ -55,9 +63,28 @@
               <!-- </tr> -->
 
               <tr>
-                <td colspan="2" class="fw-bold"></td>
-                <td class="text-end fs-5">
-                  <p class="p-2">總計: {{ $filters.currency(cart.total) }}</p>
+                <td colspan="3" class="text-end">
+                  <p class="mb-3">
+                    小計:
+                    <span class="ms-3"
+                      >NT$ {{ $filters.currency(cart.total) }}</span
+                    >
+                  </p>
+                  <p class="mb-3">
+                    折扣金額:
+                    <span class="ms-3"
+                      >NT$
+                      {{
+                        $filters.currency(cart.final_total - cart.total)
+                      }}</span
+                    >
+                  </p>
+                  <p class="mb-3">
+                    總計:
+                    <span class="ms-3"
+                      >NT$ {{ $filters.currency(cart.total) }}</span
+                    >
+                  </p>
                 </td>
               </tr>
               <!-- <tr v-if="cart.final_total !== cart.total">
@@ -138,19 +165,19 @@
             </div>
 
             <div class="mb-3">
-              <label for="message" class="form-label">留言</label>
+              <label for="message" class="form-label">備註</label>
               <textarea
                 name=""
                 id="message"
                 class="form-control"
                 cols="30"
-                rows="10"
+                rows="5"
                 v-model="form.message"
               ></textarea>
             </div>
             <div class="d-flex justify-content-between">
-              <a href="#/cart" class="btn btn-brown-deep">上一步</a>
-              <button class="btn btn-outline-brown-deep">送出訂單</button>
+              <a href="#/cart" class="btn btn-yellow-deep text-white">上一步</a>
+              <button class="btn btn-yellow text-white">送出訂單</button>
             </div>
           </Form>
         </div>
@@ -186,7 +213,6 @@
 <script>
 import process from "@/components/Process.vue";
 import { mapState, mapActions } from "pinia";
-import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
 
@@ -209,15 +235,15 @@ export default {
   },
   computed: {
     ...mapState(cartStore, ["cart"]),
-    ...mapState(statusStore, ["isLoading", "cartLoading"]),
+    ...mapState(statusStore, ["isLoading"]),
   },
   methods: {
-    ...mapActions(productStore, ["getProducts"]),
     ...mapActions(cartStore, ["getCart"]),
 
     createOrder() {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
       const order = this.form;
+
       this.$http.post(url, { data: order }).then((res) => {
         console.log(res.data.orderId);
         this.getCart();
@@ -227,7 +253,6 @@ export default {
   },
   mounted() {
     this.getCart();
-    this.getProducts();
   },
 };
 </script>

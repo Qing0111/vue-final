@@ -39,7 +39,7 @@ export default defineStore("cartStore", {
     updateCart(item, qty) {
       console.log(item);
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
-      // status.isLoading = true;
+      status.isLoading = true;
       status.cartLoading = item.id;
       const cart = {
         product_id: item.product_id,
@@ -47,6 +47,7 @@ export default defineStore("cartStore", {
       };
       axios.put(url, { data: cart }).then((res) => {
         // console.log(res);
+        status.isLoading = false;
         status.cartLoading = "";
         this.getCart();
       });
@@ -55,10 +56,12 @@ export default defineStore("cartStore", {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
       status.isLoading = true;
       axios.delete(url).then((res) => {
-        status.isLoading = false;
-        console.log(res);
-        status.pushMessage(res.data.success, { title: "刪除" });
-        this.getCart();
+        if (res.data.success) {
+          status.isLoading = false;
+          console.log(res);
+          status.pushMessage(res.data.success, { title: "刪除" });
+          this.getCart();
+        }
       });
     },
   },
