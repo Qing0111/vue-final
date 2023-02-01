@@ -23,7 +23,7 @@
           <article class="content">
             <h2>RabbitFamily</h2>
             <p>The best for your bunny</p>
-            <a href="#/products" class="btn btn-yellow text-white">shop now</a>
+            <a href="#/products?category=全部" class="btn btn-yellow text-white">shop now</a>
           </article>
         </swiper-slide>
         <swiper-slide>

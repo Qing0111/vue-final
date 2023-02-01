@@ -31,7 +31,7 @@ export default defineStore("cartStore", {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       status.isLoading = true;
       axios.get(url).then((res) => {
-        console.log("card", res.data.data);
+        // console.log("card", res.data.data);
         this.cart = res.data.data;
         status.isLoading = false;
       });
