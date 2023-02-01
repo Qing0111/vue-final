@@ -15,11 +15,11 @@
         <thead class="table-brown-deep">
           <tr>
             <th class="py-3">購買時間</th>
-            <th>Email</th>
-            <th>購買款項</th>
-            <th>應付金額</th>
-            <th>是否付款</th>
-            <th>編輯</th>
+            <th class="py-3">Email</th>
+            <th class="py-3">購買款項</th>
+            <th class="py-3">應付金額</th>
+            <th class="py-3">是否付款</th>
+            <th class="py-3">編輯</th>
           </tr>
         </thead>
         <tbody>

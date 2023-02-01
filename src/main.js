@@ -42,6 +42,7 @@ setLocale("zh_TW");
 app.use(VueAxios, axios);
 app.use(router);
 app.use(pinia);
+
 app.component("Loading", Loading);
 
 // 註冊 vee-validate 三個全域元件

@@ -9,3 +9,10 @@
 
 @import "./helpers/reset";
 @import "./helpers/loading";
+.swal2-popup.swal2-toast {
+  top: 80px;
+  padding: 8px !important;
+  .swal2-title {
+    padding: 0.5em 0em 0.25em !important;
+  }
+}

@@ -24,11 +24,11 @@
         <thead class="table-brown-deep">
           <tr>
             <th class="py-3" width="120">分類</th>
-            <th>產品名稱</th>
-            <th width="120">原價</th>
-            <th width="120">售價</th>
-            <th width="100">是否啟用</th>
-            <th width="200">編輯</th>
+            <th class="py-3">產品名稱</th>
+            <th class="py-3" width="120">原價</th>
+            <th class="py-3" width="120">售價</th>
+            <th class="py-3" width="100">是否啟用</th>
+            <th class="py-3" width="200">編輯</th>
           </tr>
         </thead>
         <tbody class="">

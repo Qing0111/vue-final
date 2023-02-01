@@ -1,29 +1,32 @@
 <template>
   <NavbarBack></NavbarBack>
   <div class="container-fluid position-relative">
-    <ToastMessages></ToastMessages>
+    <!-- <ToastMessages></ToastMessages> -->
   </div>
   <router-view />
 </template>
 
-
 <style lang="scss">
 .back {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 72px);
   padding: 60px 20px;
+}
+@media (min-width: 768px){
+  .back {
+  min-height: calc(100vh - 64px);
+}
 }
 </style>
 
-
 <script>
 import emitter from "@/methods/emitter";
-import ToastMessages from "@/components/ToastMessages.vue";
+// import ToastMessages from "@/components/ToastMessages.vue";
 import NavbarBack from "../../components/NavbarBack.vue";
 
 export default {
   components: {
     NavbarBack,
-    ToastMessages,
+    // ToastMessages,
   },
   provide() {
     return {

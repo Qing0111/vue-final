@@ -20,10 +20,10 @@
         <thead class="bg-brown-deep text-white">
           <tr>
             <th class="py-3">名稱</th>
-            <th>折扣百分比</th>
-            <th>到期日</th>
-            <th>是否啟用</th>
-            <th>編輯</th>
+            <th class="py-3">折扣百分比</th>
+            <th class="py-3">到期日</th>
+            <th class="py-3">是否啟用</th>
+            <th class="py-3">編輯</th>
           </tr>
         </thead>
         <tbody>
@@ -161,7 +161,7 @@ export default {
       }
       this.$http[httpMethod](url, { data: tempCoupon }).then((res) => {
         console.log(res);
-        this.pushMessage(res.data.success, {title:"編輯"});
+        this.pushMessage(res.data.success, { title: "編輯" });
         this.getCoupons();
         this.$refs.couponModal.hideModal();
       });
@@ -171,7 +171,7 @@ export default {
       this.isLoading = true;
       this.$http.delete(url).then((res) => {
         console.log(res, this.tempCoupon);
-        this.pushMessage(res.data.success, {title:"刪除"});
+        this.pushMessage(res.data.success, { title: "刪除" });
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();
         this.getCoupons();

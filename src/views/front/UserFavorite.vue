@@ -68,10 +68,7 @@
       </article>
     </section>
   </main>
-  <DelModal
-    ref="delModal"
-    @del-item="clearLocal"
-  ></DelModal>
+  <DelModal ref="delModal" @del-item="clearLocal"></DelModal>
 </template>
 
 <style lang="scss">
@@ -182,6 +179,8 @@ import DelModal from "@/components/DelModal.vue";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+
+
 
 export default {
   components: {

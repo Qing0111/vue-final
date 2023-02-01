@@ -283,7 +283,7 @@
 
 <script>
 import emitter from "@/methods/emitter";
-import ToastMessages from "@/components/ToastMessages.vue";
+// import ToastMessages from "@/components/ToastMessages.vue";
 import { mapState, mapActions } from "pinia";
 import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
@@ -296,7 +296,7 @@ import "aos/dist/aos.css";
 
 export default {
   components: {
-    ToastMessages,
+    // ToastMessages,
     Pagination,
   },
   mixins: [localFavorite],
