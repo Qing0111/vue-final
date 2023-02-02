@@ -45,7 +45,7 @@ const routes = [
         path: "orderCompleted/:orderId",
         name: "orderCompleted",
         component: () => import("../views/front/OrderCompleted.vue"),
-      }
+      },
     ],
   },
   {
@@ -76,11 +76,11 @@ const routes = [
     ],
   },
   {
-    path: '/:pathMatch(.*)*',
+    path: "/:pathMatch(.*)*",
     redirect: {
       name: "home",
-    }
-  }
+    },
+  },
 ];
 
 const router = createRouter({

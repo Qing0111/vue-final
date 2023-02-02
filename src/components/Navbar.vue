@@ -133,8 +133,10 @@ header {
           text-decoration: none;
           color: #fff;
           padding: 12px 8px;
-          &.active,
           &:hover {
+            color: #f7d3a0;
+          }
+          &.active {
             color: #c8a472;
           }
         }
@@ -164,7 +166,9 @@ header {
         display: inline-block;
         text-decoration: none;
         color: #fff;
-        &:hover,
+        &:hover {
+          color: #f7d3a0;
+        }
         &.active {
           color: #c8a472;
         }
@@ -262,31 +266,10 @@ header {
         }
       }
       .collect-shop {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        gap: 12px;
         a {
-          display: inline-block;
-          text-decoration: none;
           color: #fff;
           i {
             font-size: 24px;
-          }
-        }
-        .itemLength {
-          position: relative;
-          article {
-            position: absolute;
-            top: -6px;
-            left: 60%;
-            width: 16px;
-            height: 16px;
-            text-align: center;
-            line-height: 16px;
-            border-radius: 50%;
-            font-size: 12px;
-            background-color: #c8a472;
           }
         }
       }
