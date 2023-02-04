@@ -46,12 +46,12 @@ const routes = [
         name: "orderCompleted",
         component: () => import("../views/front/OrderCompleted.vue"),
       },
+      {
+        path: "login",
+        name: "login",
+        component: () => import("../views/front/Login.vue"),
+      },
     ],
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: () => import("../views/front/Login.vue"),
   },
   {
     path: "/dashboard",

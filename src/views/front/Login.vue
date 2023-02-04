@@ -9,7 +9,7 @@
       </div>
     </div>
   </Loading>
-  <Navbar></Navbar>
+ 
   <main class="container login">
     <form class="row justify-content-center mb-5" @submit.prevent="signIn">
       <div class="col-md-6">
@@ -46,7 +46,7 @@
       </div>
     </form>
   </main>
-  <Footer></Footer>
+
 </template>
 
 <style lang="scss">
@@ -66,8 +66,6 @@
 </style>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue";
 
 export default {
   data() {
@@ -78,10 +76,6 @@ export default {
       },
       isLoading: false,
     };
-  },
-  components: {
-    Navbar,
-    Footer,
   },
   methods: {
     signIn() {
