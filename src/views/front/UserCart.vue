@@ -15,7 +15,7 @@
       <!-- 購物車列表 -->
       <div class="table-responsive">
         <table class="table">
-          <thead class="bg-brown-deep text-white">
+          <thead class="">
             <tr class="">
               <th scope="col" class="py-3" width="10%">圖片</th>
               <th scope="col" width="30%">商品名稱</th>
@@ -135,10 +135,10 @@
           </p>
         </article>
         <article class="d-flex justify-content-between mt-4">
-          <a
-            href="#/products?category=全部"
+          <router-link
+            to="/products?category=全部"
             class="btn btn-yellow-deep text-white"
-            >繼續購物</a
+            >繼續購物</router-link
           >
           <p class="fw-bold align-self-center fs-4">
             總計: NT$ {{ $filters.currency(cart.final_total) }}
@@ -146,15 +146,15 @@
           <!-- <p class="fw-bold align-self-center fs-4" v-else>
             折價後: NT$ {{ $filters.currency(cart.final_total) }}
           </p> -->
-          <a href="#/checkout" class="btn btn-yellow text-white">下一步</a>
+          <router-link to="/checkout" class="btn btn-yellow text-white">下一步</router-link>
         </article>
       </div>
     </section>
     <section class="empty-cart" v-else>
       <article class="">
         <h2>目前您的購物車沒有任何商品!</h2>
-        <a href="#/products?category=全部" class="btn btn-yellow text-white"
-          >來去購物</a
+        <router-link to="/products?category=全部" class="btn btn-yellow text-white"
+          >來去購物</router-link
         >
       </article>
     </section>
@@ -170,6 +170,10 @@
     // border: 1px solid #54433c;
     thead {
       display: none;
+      tr {
+        border-top: 2px solid #54433c;
+        border-bottom: 1px solid #54433c;
+      }
     }
     tbody {
       tr {

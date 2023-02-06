@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <Loading :active="isLoading">
     <div class="loadingio-spinner-double-ring-juf8237g2sc">
@@ -16,12 +17,12 @@
         <!-- 購物車列表 -->
         <div class="table-responsive">
           <table class="table">
-            <thead class="bg-brown-deep text-white">
+            <thead class="">
               <tr>
-                <!-- <th scope="col" class="py-3" width="10%">圖片</th> -->
-                <th scope="col" class="py-3" width="40%">產品</th>
+                <th colspan="3" class="py-3 fs-5">訂單明細</th>
+                <!-- <th scope="col" class="py-3" width="40%">產品</th>
                 <th scope="col" width="20%">數量</th>
-                <th scope="col" width="40%">金額</th>
+                <th scope="col" width="40%">金額</th> -->
               </tr>
             </thead>
             <tbody>
@@ -41,11 +42,6 @@
                       {{ item.product.title }}
                     </p>
                   </td>
-
-                  <!-- <div class="text-success" v-if="item.coupon">
-                    已套用優惠券
-                  </div> -->
-
                   <td class="align-middle">
                     <p>{{ item.qty }}/{{ item.product.unit }}</p>
                   </td>
@@ -56,15 +52,9 @@
               </template>
             </tbody>
             <tfoot>
-              <!-- <tr> -->
-              <!-- <td colspan="1" class="d-none d-sm-table-cell"></td> -->
-              <!-- <td colspan="5"></td>
-            </tr> -->
-              <!-- </tr> -->
-
               <tr>
                 <td colspan="3" class="text-end">
-                  <p class="mb-3">
+                  <p class="my-3">
                     小計:
                     <span class="ms-3"
                       >NT$ {{ $filters.currency(cart.total) }}</span
@@ -87,12 +77,6 @@
                   </p>
                 </td>
               </tr>
-              <!-- <tr v-if="cart.final_total !== cart.total">
-              <td colspan="3" class="text-end text-success">折扣價</td>
-              <td class="text-end text-success">
-                {{ $filters.currency(cart.final_total) }}
-              </td>
-            </tr> -->
             </tfoot>
           </table>
         </div>
@@ -101,7 +85,8 @@
       <section class="col-md-6">
         <div class="row justify-content-center">
           <Form class="col-md-10" v-slot="{ errors }" @submit="createOrder">
-            <div class="mb-3">
+            <h2 class="fs-5">收件人資料</h2>
+            <div class="my-3 px-2">
               <label for="email" class="form-label">Email</label>
               <Field
                 id="email"
@@ -119,7 +104,7 @@
               ></ErrorMessage>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 px-2">
               <label for="name" class="form-label">收件人姓名</label>
               <Field
                 id="name"
@@ -134,7 +119,7 @@
               <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 px-2">
               <label for="tel" class="form-label">收件人電話</label>
               <Field
                 id="tel"
@@ -149,7 +134,7 @@
               <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 px-2">
               <label for="address" class="form-label">收件人地址</label>
               <Field
                 id="address"
@@ -164,7 +149,7 @@
               <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 px-2">
               <label for="message" class="form-label">備註</label>
               <textarea
                 name=""
@@ -175,7 +160,7 @@
                 v-model="form.message"
               ></textarea>
             </div>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between px-2">
               <a href="#/cart" class="btn btn-yellow-deep text-white">上一步</a>
               <button class="btn btn-yellow text-white">送出訂單</button>
             </div>
@@ -192,7 +177,12 @@
   min-height: calc(100vh - 158px);
   table {
     // border: 1px solid #54433c;
-
+    thead {
+      tr {
+        border-bottom: 2px solid #54433c;
+        // border-bottom: 1px solid #54433c;
+      }
+    }
     tbody {
       tr {
         border-bottom: 1px solid #54433c;
@@ -201,6 +191,10 @@
   }
 
   Form {
+    h2 {
+      padding: 16px 8px;
+      border-bottom: 2px solid #54433c;
+    }
     input,
     textarea {
       box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.4) inset;

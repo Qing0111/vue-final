@@ -52,7 +52,7 @@
             <article class="card product-card">
               <router-link :to="`/product/${item.id}`">
                 <div class="pic">
-                  <img :src="item.imageUrl" class="card-img-top" alt="圖片" />
+                  <img :src="item.imageUrl" class="card-img-top" alt="產品圖" />
                 </div>
               </router-link>
 
@@ -365,7 +365,7 @@ export default {
       this.$router.push(`/product/${id}`);
     },
     category(category) {
-      this.$router.push({ name: "products", query: { category } });
+      this.$router.push({ query: { category: category } });
       this.tabState = category;
     },
     setPagination(page = 1) {

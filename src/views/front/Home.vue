@@ -9,6 +9,7 @@
       </div>
     </div>
   </Loading>
+  <Navbar></Navbar>
   <main>
     <section class="banner">
       <swiper
@@ -23,7 +24,9 @@
           <article class="content">
             <h2>RabbitFamily</h2>
             <p>The best for your bunny</p>
-            <a href="#/products?category=全部" class="btn btn-yellow text-white">shop now</a>
+            <router-link to="/products?category=全部" class="btn btn-yellow text-white"
+              >shop now</router-link
+            >
           </article>
         </swiper-slide>
         <swiper-slide>
@@ -31,7 +34,7 @@
           <article class="content">
             <h2 class="text-white">RabbitFamily</h2>
             <p class="text-white">The best for your bunny</p>
-            <a href="#/products" class="btn btn-yellow text-white">shop now</a>
+            <router-link to="/products" class="btn btn-yellow text-white">shop now</router-link>
           </article>
         </swiper-slide>
       </swiper>
@@ -45,7 +48,7 @@
         data-aos-offset="0"
       >
         <section class="product-commodity">
-          <a href="#/products?category=飼料">
+          <router-link to="/products?category=飼料">
             <figure>
               <img src="@/assets/image/發泡飼料.jpg" alt="" />
               <div class="content">
@@ -53,8 +56,8 @@
                 <p>shop now</p>
               </div>
             </figure>
-          </a>
-          <a href="#/products?category=兔用品">
+          </router-link>
+          <router-link to="/products?category=兔用品">
             <figure>
               <img src="@/assets/image/兔籠子.jpg" alt="" />
               <div class="content">
@@ -62,7 +65,7 @@
                 <p>shop now</p>
               </div>
             </figure>
-          </a>
+          </router-link>
         </section>
         <section class="new-product">
           <h2>兔用新品</h2>
@@ -121,7 +124,7 @@
           data-aos-once="true"
           data-aos-duration="1000"
         >
-          <a href="#/products?category=兔子">
+          <router-link to="/products?category=兔子">
             <figure>
               <img src="@/assets/image/rabbit.jpg" alt="" />
               <div class="content">
@@ -129,7 +132,7 @@
                 <p>shop now</p>
               </div>
             </figure>
-          </a>
+          </router-link>
         </section>
 
         <section class="introduce">
@@ -199,6 +202,7 @@
       </article>
     </section>
   </main>
+  <Footer></Footer>
 </template>
 
 <style lang="scss">
@@ -219,20 +223,18 @@
   }
   .content {
     position: absolute;
-    top: 60%;
+    top: 56%;
     left: 8%;
-    transform: translateY(-50%);
     h2 {
-      font-size: 32px;
+      font-size: 28px;
       margin-bottom: 16px;
       color: #54433c;
     }
     p {
-      font-size: 28px;
+      font-size: 20px;
       margin-bottom: 12px;
     }
     a {
-      font-size: 20px;
       text-decoration: none;
       border-radius: 0px;
       padding: 4px 20px;
@@ -250,6 +252,16 @@
     .content {
       top: 50%;
       left: 16%;
+      transform: translateY(-50%);
+      h2 {
+        font-size: 32px;
+      }
+      p {
+        font-size: 28px;
+      }
+      a {
+        font-size: 20px;
+      }
     }
   }
 }
@@ -611,6 +623,8 @@
 </style>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 import { mapState, mapActions } from "pinia";
 import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
@@ -630,6 +644,8 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 export default {
   components: {
+    Navbar,
+    Footer,
     Swiper,
     SwiperSlide,
   },

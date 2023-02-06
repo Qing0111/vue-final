@@ -11,47 +11,47 @@
       <nav ref="nav">
         <ul>
           <li>
-            <a
-              href="#/"
+            <router-link
+              to="/"
               @click="removeBurger"
-              :class="{ active: this.$route.path == '/' }"
-              >首頁</a
+
+              >首頁</router-link
             >
           </li>
           <li>
-            <a
-              href="#/products?category=全部"
+            <router-link
+              to="/products?category=全部"
               @click="removeBurger"
-              :class="{ active: this.$route.path == '/products' }"
-              >商品</a
+
+              >商品</router-link
             >
           </li>
         </ul>
       </nav>
 
       <div class="logo">
-        <h1><a href="#/">RabbitFamily</a></h1>
+        <h1><router-link to="/">RabbitFamily</router-link></h1>
       </div>
       <ul class="collect-shop">
         <li>
-          <a href="#/login" :class="{ active: this.$route.path == '/login' }"
+          <router-link to="/login"
             ><i class="bi bi-person"></i
-          ></a>
+          ></router-link>
         </li>
         <li class="itemLength">
-          <a
-            href="#/favorite"
-            :class="{ active: this.$route.path == '/favorite' }"
+          <router-link
+            to="/favorite"
+            
             ><i class="bi bi-suit-heart"></i
-          ></a>
+          ></router-link>
           <article class="text-white" v-if="favoriteItems.length">
             {{ favoriteItems.length }}
           </article>
         </li>
         <li class="itemLength">
-          <a href="#/cart" :class="{ active: this.$route.path == '/cart' }"
+          <router-link to="/cart" :class="{ active: this.$route.path == '/cart' }"
             ><i class="bi bi-cart3"></i
-          ></a>
+          ></router-link>
           <article class="text-white" v-if="cart.total">
             {{ cart.carts.length }}
           </article>
