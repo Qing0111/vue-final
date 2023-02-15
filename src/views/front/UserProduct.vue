@@ -152,7 +152,13 @@
         <template v-for="(item, key) in filterData" :key="key">
           <swiper-slide>
             <article class="card product-card">
-              <router-link :to="`/product/${item.id}`">
+              <router-link
+                :to="{
+                  name: 'product',
+                  params: { product: item.id },
+                  query: { name: item.title },
+                }"
+              >
                 <div class="pic">
                   <img :src="item.imageUrl" class="card-img-top" alt="圖片" />
                 </div>
@@ -444,7 +450,7 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
       // this.isLoading = true;
       this.$http.get(api).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         // this.isLoading = false;
         if (response.data.success) {
           this.product = response.data.product;

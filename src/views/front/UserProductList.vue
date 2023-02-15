@@ -50,7 +50,13 @@
             data-aos-offset="0"
           >
             <article class="card product-card">
-              <router-link :to="`/product/${item.id}`">
+              <router-link
+                :to="{
+                  name: 'product',
+                  params: { product: item.id },
+                  query: { name: item.title },
+                }"
+              >
                 <div class="pic">
                   <img :src="item.imageUrl" class="card-img-top" alt="產品圖" />
                 </div>
@@ -360,12 +366,9 @@ export default {
   methods: {
     ...mapActions(productStore, ["getProducts"]),
     ...mapActions(cartStore, ["addToCart", "getCart"]),
-
-    getProduct(id) {
-      this.$router.push(`/product/${id}`);
-    },
+    
     category(category) {
-      this.$router.push({ query: { category: category } });
+      this.$router.push({ name: "products", query: { category: category } });
       this.tabState = category;
     },
     setPagination(page = 1) {

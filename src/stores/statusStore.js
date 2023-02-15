@@ -36,7 +36,7 @@ export default defineStore("statusStore", {
         this.messages.push({
           style: "danger",
           title: `${title}失敗`,
-          content: message.join("、"),
+          content: this.message.join("、"),
         });
         Toast.fire({
           icon: "error",

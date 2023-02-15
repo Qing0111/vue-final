@@ -111,7 +111,7 @@
 </style>
 
 <script>
-import process from "@/components/Process.vue";
+import process from "@/components/ShopProcess.vue";
 
 export default {
   components: {

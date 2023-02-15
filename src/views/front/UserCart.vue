@@ -28,7 +28,13 @@
             <template v-if="cart">
               <tr v-for="item in cart.carts" :key="item.id">
                 <td>
-                  <a :href="`#/product/${item.product.id}`">
+                  <router-link
+                    :to="{
+                      name: 'product',
+                      params: { product: item.product_id },
+                      query: { name: item.product.title },
+                    }"
+                  >
                     <img
                       :src="item.product.imageUrl"
                       alt="產品圖"
@@ -36,7 +42,7 @@
                       height="100"
                       style="object-fit: cover"
                     />
-                  </a>
+                  </router-link>
                   <h2 class="d-sm-none mt-1">{{ item.product.title }}</h2>
                 </td>
                 <td class="align-middle d-none d-sm-table-cell">
@@ -146,14 +152,18 @@
           <!-- <p class="fw-bold align-self-center fs-4" v-else>
             折價後: NT$ {{ $filters.currency(cart.final_total) }}
           </p> -->
-          <router-link to="/checkout" class="btn btn-yellow text-white">下一步</router-link>
+          <router-link to="/material" class="btn btn-yellow text-white"
+            >下一步</router-link
+          >
         </article>
       </div>
     </section>
     <section class="empty-cart" v-else>
       <article class="">
         <h2>目前您的購物車沒有任何商品!</h2>
-        <router-link to="/products?category=全部" class="btn btn-yellow text-white"
+        <router-link
+          to="/products?category=全部"
+          class="btn btn-yellow text-white"
           >來去購物</router-link
         >
       </article>
@@ -245,7 +255,7 @@ import { mapState, mapActions } from "pinia";
 import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
-import process from "@/components/Process.vue";
+import process from "@/components/ShopProcess.vue";
 import DelModal from "@/components/DelModal.vue";
 
 export default {

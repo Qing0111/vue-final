@@ -45,7 +45,7 @@ export default defineStore("cartStore", {
         product_id: item.product_id,
         qty: qty,
       };
-      axios.put(url, { data: cart }).then((res) => {
+      axios.put(url, { data: cart }).then(() => {
         // console.log(res);
         status.isLoading = false;
         status.cartLoading = "";

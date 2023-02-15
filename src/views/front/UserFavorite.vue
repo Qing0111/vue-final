@@ -34,7 +34,10 @@
           data-aos-duration="800"
           data-aos-offset="0"
         >
-          <div class="pic">
+          <div
+            class="pic"
+            @click="getProduct(item.product.id, item.product.title)"
+          >
             <img :src="item.product.imageUrl" alt="產品圖片" />
           </div>
           <article class="content">
@@ -62,7 +65,9 @@
     >
       <article class="h-100">
         <h2>目前您的收藏沒有任何商品!</h2>
-        <router-link to="/products?category=全部" class="btn btn-yellow text-white"
+        <router-link
+          to="/products?category=全部"
+          class="btn btn-yellow text-white"
           >來去購物</router-link
         >
       </article>
@@ -97,11 +102,13 @@
       width: 0;
       height: 0;
     }
+
     .pic {
       height: 200px;
       border-radius: 24px;
       overflow: hidden;
       margin-bottom: 12px;
+      cursor: pointer;
       img {
         width: 100%;
         height: 100%;
@@ -180,8 +187,6 @@ import DelModal from "@/components/DelModal.vue";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-
-
 export default {
   components: {
     DelModal,
@@ -212,6 +217,13 @@ export default {
           });
         });
       }
+    },
+    getProduct(id, name) {
+      this.$router.push({
+        name: "product",
+        params: { product: id },
+        query: { name: name },
+      });
     },
     removeFavoriteProduct(id, key) {
       this.toggleFavorite(id);

@@ -24,7 +24,9 @@
           <article class="content">
             <h2>RabbitFamily</h2>
             <p>The best for your bunny</p>
-            <router-link to="/products?category=全部" class="btn btn-yellow text-white"
+            <router-link
+              to="/products?category=全部"
+              class="btn btn-yellow text-white"
               >shop now</router-link
             >
           </article>
@@ -34,7 +36,9 @@
           <article class="content">
             <h2 class="text-white">RabbitFamily</h2>
             <p class="text-white">The best for your bunny</p>
-            <router-link to="/products" class="btn btn-yellow text-white">shop now</router-link>
+            <router-link to="/products" class="btn btn-yellow text-white"
+              >shop now</router-link
+            >
           </article>
         </swiper-slide>
       </swiper>
@@ -79,7 +83,13 @@
               data-aos-duration="1000"
             >
               <article class="card product-card">
-                <router-link :to="`/product/${item.id}`">
+                <router-link
+                  :to="{
+                    name: 'product',
+                    params: { product: item.id },
+                    query: { name: item.title },
+                  }"
+                >
                   <div class="pic">
                     <img :src="item.imageUrl" class="card-img-top" alt="圖片" />
                   </div>

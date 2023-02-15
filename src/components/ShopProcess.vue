@@ -8,8 +8,8 @@
       <h2
         :class="{
           active:
-            this.$route.path == '/checkout' ||
-            this.$route.path == `/checkout/${orderId}` ||
+            this.$route.path == '/material' ||
+            this.$route.path == `/material/${orderId}` ||
             this.$route.path == `/orderCompleted/${orderId}`,
         }"
       >
@@ -21,7 +21,7 @@
       <h2
         :class="{
           active:
-            this.$route.path == `/checkout/${orderId}` ||
+            this.$route.path == `/material/${orderId}` ||
             this.$route.path == `/orderCompleted/${orderId}`,
         }"
       >
@@ -37,7 +37,7 @@
       >
         4
       </h2>
-      <p>完成訂單</p>
+      <p>訂單完成</p>
     </article>
   </section>
 </template>

@@ -20,16 +20,12 @@
             <thead class="">
               <tr>
                 <th colspan="3" class="py-3 fs-5">訂單明細</th>
-                <!-- <th scope="col" class="py-3" width="40%">產品</th>
-                <th scope="col" width="20%">數量</th>
-                <th scope="col" width="40%">金額</th> -->
               </tr>
             </thead>
             <tbody>
               <template v-if="cart">
                 <tr v-for="item in cart.carts" :key="item.id">
                   <td class="d-lg-flex align-items-center gap-1">
-                    <a :href="`#/product/${item.product.id}`">
                       <img
                         :src="item.product.imageUrl"
                         alt="產品圖"
@@ -37,7 +33,6 @@
                         height="100"
                         style="object-fit: cover"
                       />
-                    </a>
                     <p>
                       {{ item.product.title }}
                     </p>
@@ -205,7 +200,7 @@
 </style>
 
 <script>
-import process from "@/components/Process.vue";
+import process from "@/components/ShopProcess.vue";
 import { mapState, mapActions } from "pinia";
 import cartStore from "@/stores/cartStore";
 import statusStore from "@/stores/statusStore";
