@@ -9,7 +9,7 @@
       </div>
     </div>
   </Loading>
- 
+
   <main class="container login">
     <form class="row justify-content-center mb-5" @submit.prevent="signIn">
       <div class="col-md-6">
@@ -46,10 +46,9 @@
       </div>
     </form>
   </main>
-
 </template>
 
-<style lang="scss">
+<style lang="scss" scope>
 .login {
   height: calc(100vh - 158px);
   display: flex;
@@ -66,7 +65,6 @@
 </style>
 
 <script>
-
 export default {
   data() {
     return {
@@ -79,7 +77,7 @@ export default {
   },
   methods: {
     signIn() {
-      console.log("login");
+      // console.log("login");
       this.isLoading = true;
       const api = `${process.env.VUE_APP_API}/admin/signin`;
       // fetch(api, {

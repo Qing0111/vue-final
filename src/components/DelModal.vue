@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" tabindex="-1" ref="modal">
+  <div class="modal fade" tabindex="-1" ref="modal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="d-flex justify-content-end p-3">
@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scope>
 .modal-dialog {
   min-height: 80vh;
   display: flex;

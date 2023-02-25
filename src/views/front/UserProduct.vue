@@ -468,20 +468,6 @@ export default {
     add() {
       this.num++;
     },
-    // addToCart(id, qty = 1) {
-    //   const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
-    //   const cart = {
-    //     product_id: id,
-    //     qty,
-    //   };
-    //   this.isLoading = true;
-    //   this.$http.post(url, { data: cart }).then((res) => {
-    //     this.isLoading = false;
-    //     console.log(res);
-    //     this.$httpMessageState(res, "加入購物車");
-    //     this.$router.push("/user/cart");
-    //   });
-    // },
   },
   watch: {
     $route() {

@@ -33,7 +33,7 @@
         </thead>
         <tbody class="">
           <tr
-            v-for="(item, index) in products"
+            v-for="item in products"
             :key="item.id"
             style="border-bottom: 1px solid #000"
           >
@@ -113,7 +113,7 @@
 import ProductModal from "@/components/ProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
 import Pagination from "@/components/Pagination.vue";
-import { mapState, mapActions } from "pinia";
+import { mapActions } from "pinia";
 import statusStore from "@/stores/statusStore";
 
 export default {

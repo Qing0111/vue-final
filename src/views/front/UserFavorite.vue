@@ -10,73 +10,77 @@
     </div>
   </Loading>
   <main class="container-md">
-    <section class="favorite" v-if="favoriteProduct.length">
-      <nav aria-label="breadcrumb tabs">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <router-link to="/" class="text-decoration-none text-dark"
-              >首頁</router-link
-            >
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">我的收藏</li>
-          <li class="ms-auto">
-            <a href="#" class="text-yellow" @click.prevent="openDelModal()"
-              >清除全部</a
-            >
-          </li>
-        </ol>
-      </nav>
-      <template v-for="(item, key) in favoriteProduct" :key="key">
-        <div
-          class="card-favorite"
-          data-aos="fade-up"
-          data-aos-once="true"
-          data-aos-duration="800"
-          data-aos-offset="0"
-        >
-          <div
-            class="pic"
-            @click="getProduct(item.product.id, item.product.title)"
+    <transition name="switch" mode="out-in" >
+      <section class="favorite" v-if="favoriteProduct.length">
+        <nav aria-label="breadcrumb tabs">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <router-link to="/" class="text-decoration-none text-dark"
+                >首頁</router-link
+              >
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">我的收藏</li>
+            <li class="ms-auto">
+              <a href="#" class="text-yellow" @click.prevent="openDelModal()"
+                >清除全部</a
+              >
+            </li>
+          </ol>
+        </nav>
+        <ul>
+          <li
+            class="card-favorite"
+            v-for="(item, key) in favoriteProduct"
+            :key="key"
+            data-aos="fade-up"
+            data-aos-once="true"
+            data-aos-duration="800"
+            data-aos-offset="0"
           >
-            <img :src="item.product.imageUrl" alt="產品圖片" />
-          </div>
-          <article class="content">
-            <h3>{{ item.product.title }}</h3>
-            <p>{{ item.product.origin_price }}元</p>
-            <button
-              class="btn btn-yellow text-white"
-              @click="addToCart(item.product.id)"
+            <div
+              class="pic"
+              @click="getProduct(item.product.id, item.product.title)"
             >
-              加到購物車
-            </button>
-          </article>
-          <div
-            class="cross"
-            @click="removeFavoriteProduct(item.product.id, key)"
+              <img :src="item.product.imageUrl" alt="產品圖片" />
+            </div>
+            <article class="content">
+              <h3>{{ item.product.title }}</h3>
+              <p>{{ item.product.origin_price }}元</p>
+              <button
+                class="btn btn-yellow text-white"
+                @click="addToCart(item.product.id)"
+              >
+                加到購物車
+              </button>
+            </article>
+            <div
+              class="cross"
+              @click="removeFavoriteProduct(item.product.id, key)"
+            >
+              <i class="bi bi-x-lg"></i>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section
+        class="empty-cart d-flex justify-content-center align-items-center"
+        v-else
+      >
+        <article class="h-100">
+          <h2>目前您的收藏沒有任何商品!</h2>
+          <router-link
+            to="/products?category=全部"
+            class="btn btn-yellow text-white"
+            >來去購物</router-link
           >
-            <i class="bi bi-x-lg"></i>
-          </div>
-        </div>
-      </template>
-    </section>
-    <section
-      class="empty-cart d-flex justify-content-center align-items-center"
-      v-else
-    >
-      <article class="h-100">
-        <h2>目前您的收藏沒有任何商品!</h2>
-        <router-link
-          to="/products?category=全部"
-          class="btn btn-yellow text-white"
-          >來去購物</router-link
-        >
-      </article>
-    </section>
+        </article>
+      </section>
+    </transition>
   </main>
   <DelModal ref="delModal" @del-item="clearLocal"></DelModal>
 </template>
 
-<style lang="scss">
+<style lang="scss" scope>
 .favorite {
   padding: 60px 20px;
   min-height: calc(100vh - 158px);
@@ -140,6 +144,15 @@
       border-bottom: 1px solid #000;
     }
   }
+}
+.switch-enter-from,
+.switch-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.switch-enter-active,
+.switch-leave-active {
+  transition: transform 0.5s ease, opacity 0.6s;
 }
 @media (min-width: 768px) {
   .favorite {

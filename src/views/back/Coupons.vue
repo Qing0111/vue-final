@@ -102,7 +102,7 @@
 import CouponModal from "@/components/CouponModal.vue";
 import DelModal from "@/components/DelModal.vue";
 import Pagination from "@/components/Pagination.vue";
-import { mapState, mapActions } from "pinia";
+import { mapActions } from "pinia";
 import statusStore from "@/stores/statusStore";
 
 export default {

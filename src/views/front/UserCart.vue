@@ -11,168 +11,173 @@
   </Loading>
   <main class="container-md user-cart">
     <process></process>
-    <section class="mt-4" v-if="cart.total">
-      <!-- 購物車列表 -->
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="">
-            <tr class="">
-              <th scope="col" class="py-3" width="10%">圖片</th>
-              <th scope="col" width="30%">商品名稱</th>
-              <th scope="col" width="16%">數量</th>
-              <th scope="col" width="36%">金額</th>
-              <th scope="col" width="10%"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-if="cart">
-              <tr v-for="item in cart.carts" :key="item.id">
-                <td>
-                  <router-link
-                    :to="{
-                      name: 'product',
-                      params: { product: item.product_id },
-                      query: { name: item.product.title },
-                    }"
-                  >
-                    <img
-                      :src="item.product.imageUrl"
-                      alt="產品圖"
-                      width="100"
-                      height="100"
-                      style="object-fit: cover"
-                    />
-                  </router-link>
-                  <h2 class="d-sm-none mt-1">{{ item.product.title }}</h2>
-                </td>
-                <td class="align-middle d-none d-sm-table-cell">
-                  {{ item.product.title }}
-                  <!-- <div class="text-success" v-if="item.coupon">
+    <transition name="switch" mode="out-in">
+      <section class="mt-4" v-if="cart.total">
+        <!-- 購物車列表 -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="">
+              <tr class="">
+                <th scope="col" class="py-3" width="10%">圖片</th>
+                <th scope="col" width="30%">商品名稱</th>
+                <th scope="col" width="16%">數量</th>
+                <th scope="col" width="36%">金額</th>
+                <th scope="col" width="10%"></th>
+              </tr>
+            </thead>
+            <transition-group tag="tbody" name="list" appear>
+              <template v-if="cart">
+                <tr v-for="item in cart.carts" :key="item.id">
+                  <td>
+                    <router-link
+                      :to="{
+                        name: 'product',
+                        params: { product: item.product_id },
+                        query: { name: item.product.title },
+                      }"
+                    >
+                      <img
+                        :src="item.product.imageUrl"
+                        alt="產品圖"
+                        width="100"
+                        height="100"
+                        style="object-fit: cover"
+                      />
+                    </router-link>
+                    <h2 class="d-sm-none mt-1">{{ item.product.title }}</h2>
+                  </td>
+                  <td class="align-middle d-none d-sm-table-cell">
+                    {{ item.product.title }}
+                    <!-- <div class="text-success" v-if="item.coupon">
                     已套用優惠券
                   </div> -->
-                </td>
-                <td class="align-middle">
-                  <div class="d-flex count-group">
-                    <button
-                      type="button"
-                      class="btn btn-light fs-5 rounded-0"
-                      @click="updateCart(item, --item.qty)"
-                      :disabled="item.id == cartLoading || item.qty <= 1"
+                  </td>
+                  <td class="align-middle">
+                    <div class="d-flex count-group">
+                      <button
+                        type="button"
+                        class="btn btn-light fs-5 rounded-0"
+                        @click="updateCart(item, --item.qty)"
+                        :disabled="item.id == cartLoading || item.qty <= 1"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        class="form-control text-center rounded-0"
+                        min="1"
+                        @change="updateCart(item, item.qty)"
+                        :disabled="item.id == cartLoading"
+                        v-model.number="item.qty"
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-light fs-5 rounded-0"
+                        @click="updateCart(item, ++item.qty)"
+                        :disabled="item.id == cartLoading"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <small
+                      v-if="cart.final_total !== cart.total"
+                      class="text-muted text-decoration-line-through d-block"
+                      style="font-size: 14px"
+                      >NT$ {{ $filters.currency(item.total) }}</small
                     >
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      class="form-control text-center rounded-0"
-                      min="1"
-                      @change="updateCart(item, item.qty)"
-                      :disabled="item.id == cartLoading"
-                      v-model.number="item.qty"
-                    />
-                    <button
-                      type="button"
-                      class="btn btn-light fs-5 rounded-0"
-                      @click="updateCart(item, ++item.qty)"
-                      :disabled="item.id == cartLoading"
+                    NT$ {{ $filters.currency(item.final_total) }}
+                  </td>
+                  <td class="align-middle">
+                    <a
+                      href="#"
+                      class="text-secondary"
+                      :disabled="cartLoading === item.id"
+                      @click.prevent="removeCartItem(item.id)"
                     >
-                      +
-                    </button>
-                  </div>
-                </td>
-                <td class="align-middle">
-                  <small
-                    v-if="cart.final_total !== cart.total"
-                    class="text-muted text-decoration-line-through d-block"
-                    style="font-size: 14px"
-                    >NT$ {{ $filters.currency(item.total) }}</small
-                  >
-                  NT$ {{ $filters.currency(item.final_total) }}
-                </td>
-                <td class="align-middle">
-                  <a
-                    href="#"
-                    class="text-secondary"
-                    :disabled="cartLoading === item.id"
-                    @click.prevent="removeCartItem(item.id)"
-                  >
-                    <i class="bi bi-trash3"></i>
-                  </a>
-                </td>
+                      <i class="bi bi-trash3"></i>
+                    </a>
+                  </td>
+                </tr>
+              </template>
+            </transition-group>
+            <tfoot>
+              <tr>
+                <!-- <td colspan="1" class="d-none d-sm-table-cell"></td> -->
+                <td colspan="5"></td>
               </tr>
-            </template>
-          </tbody>
-          <tfoot>
-            <tr>
-              <!-- <td colspan="1" class="d-none d-sm-table-cell"></td> -->
-              <td colspan="5"></td>
-            </tr>
-          </tfoot>
-        </table>
-        <div class="d-sm-flex justify-content-center align-items-center gap-5">
-          <button
-            type="button"
-            class="btn btn-brown text-white w-100 mb-3 mb-sm-0"
-            @click="openDelModal"
+            </tfoot>
+          </table>
+          <div
+            class="d-sm-flex justify-content-center align-items-center gap-5"
           >
-            清空購物車
-          </button>
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              v-model="coupon_code"
-              placeholder="請輸入優惠碼"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-brown text-white rounded-0 rounded-end"
-                type="button"
-                @click="addCouponCode"
-              >
-                套用優惠碼
-              </button>
+            <button
+              type="button"
+              class="btn btn-brown text-white w-100 mb-3 mb-sm-0"
+              @click="openDelModal"
+            >
+              清空購物車
+            </button>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                v-model="coupon_code"
+                placeholder="請輸入優惠碼"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-brown text-white rounded-0 rounded-end"
+                  type="button"
+                  @click="addCouponCode"
+                >
+                  套用優惠碼
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <article class="d-flex align-items-end flex-column mt-5 gap-3">
-          <p>小計: NT$ {{ $filters.currency(cart.total) }}</p>
-          <p>
-            折扣金額: NT$ {{ $filters.currency(cart.final_total - cart.total) }}
-          </p>
-        </article>
-        <article class="d-flex justify-content-between mt-4">
-          <router-link
-            to="/products?category=全部"
-            class="btn btn-yellow-deep text-white"
-            >繼續購物</router-link
-          >
-          <p class="fw-bold align-self-center fs-4">
-            總計: NT$ {{ $filters.currency(cart.final_total) }}
-          </p>
-          <!-- <p class="fw-bold align-self-center fs-4" v-else>
+          <article class="d-flex align-items-end flex-column mt-5 gap-3">
+            <p>小計: NT$ {{ $filters.currency(cart.total) }}</p>
+            <p>
+              折扣金額: NT$
+              {{ $filters.currency(cart.final_total - cart.total) }}
+            </p>
+          </article>
+          <article class="d-flex justify-content-between mt-4">
+            <router-link
+              to="/products?category=全部"
+              class="btn btn-yellow-deep text-white"
+              >繼續購物</router-link
+            >
+            <p class="fw-bold align-self-center fs-4">
+              總計: NT$ {{ $filters.currency(cart.final_total) }}
+            </p>
+            <!-- <p class="fw-bold align-self-center fs-4" v-else>
             折價後: NT$ {{ $filters.currency(cart.final_total) }}
           </p> -->
-          <router-link to="/material" class="btn btn-yellow text-white"
-            >下一步</router-link
+            <router-link to="/material" class="btn btn-yellow text-white"
+              >下一步</router-link
+            >
+          </article>
+        </div>
+      </section>
+      <section class="empty-cart" v-else>
+        <article class="">
+          <h2>目前您的購物車沒有任何商品!</h2>
+          <router-link
+            to="/products?category=全部"
+            class="btn btn-yellow text-white"
+            >來去購物</router-link
           >
         </article>
-      </div>
-    </section>
-    <section class="empty-cart" v-else>
-      <article class="">
-        <h2>目前您的購物車沒有任何商品!</h2>
-        <router-link
-          to="/products?category=全部"
-          class="btn btn-yellow text-white"
-          >來去購物</router-link
-        >
-      </article>
-    </section>
+      </section>
+    </transition>
   </main>
   <DelModal ref="delModal" @del-item="delAllCart"></DelModal>
 </template>
 
-<style lang="scss">
+<style lang="scss" scope>
 .user-cart {
   padding: 60px 20px;
   min-height: calc(100vh - 158px);
@@ -186,6 +191,22 @@
       }
     }
     tbody {
+      position: relative;
+      .list-enter-from,
+      .list-leave-to {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+      .list-enter-active {
+        transition: all 0.4s ease;
+      }
+      .list-leave-active {
+        transition: all 0.4s ease;
+        position: absolute;
+      }
+      .list-move {
+        transition: all 0.3s ease;
+      }
       tr {
         border-bottom: 1px solid #54433c;
       }
@@ -223,6 +244,16 @@
     }
   }
 }
+.switch-enter-from,
+.switch-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.switch-enter-active,
+.switch-leave-active {
+  transition: transform 0.4s ease, opacity 0.6s ease;
+}
+
 @media (min-width: 768px) {
   .user-cart {
     table {

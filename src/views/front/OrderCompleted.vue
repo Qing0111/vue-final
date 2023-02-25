@@ -83,7 +83,7 @@
   </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scope>
 .order-completed {
   padding: 60px 20px;
   min-height: calc(100vh - 158px);
@@ -93,8 +93,6 @@
     // flex-direction: column;
     // justify-content: center;
     // align-items: center;
-    h2 {
-    }
     form {
       .table {
         margin-bottom: 28px;

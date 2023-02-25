@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <section class="discount">
+  <header class="bg-brown-deep">
+    <section class="discount bg-natural-yellow">
       <p>輸入優惠碼 : 52rabbit，可享有8折優惠!</p>
     </section>
     <section class="header">
@@ -66,14 +66,11 @@
 
 header {
   width: 100%;
-  background-color: #54433c;
   position: sticky;
   top: 0;
   z-index: 10;
   .discount {
-    background-color: #f9ba37;
     padding: 4px 0px;
-    // text-align: center;
     overflow: hidden;
     p {
       animation: discount-move 10s linear infinite;

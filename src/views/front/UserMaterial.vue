@@ -26,13 +26,13 @@
               <template v-if="cart">
                 <tr v-for="item in cart.carts" :key="item.id">
                   <td class="d-lg-flex align-items-center gap-1">
-                      <img
-                        :src="item.product.imageUrl"
-                        alt="產品圖"
-                        width="100"
-                        height="100"
-                        style="object-fit: cover"
-                      />
+                    <img
+                      :src="item.product.imageUrl"
+                      alt="產品圖"
+                      width="100"
+                      height="100"
+                      style="object-fit: cover"
+                    />
                     <p>
                       {{ item.product.title }}
                     </p>

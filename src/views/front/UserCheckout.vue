@@ -77,7 +77,7 @@
   </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scope>
 .user-checkout {
   min-height: calc(100vh - 158px);
   padding: 60px 20px;

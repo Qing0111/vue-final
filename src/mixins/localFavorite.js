@@ -1,8 +1,7 @@
 import emitter from "@/methods/emitter";
-import { mapState, mapActions } from "pinia";
+import { mapActions } from "pinia";
 import statusStore from "@/stores/statusStore";
 
-const status = statusStore();
 
 export default {
   computed: {},

@@ -176,7 +176,7 @@
       </section>
     </div>
 
-    <section class="information">
+    <section class="information bg-yellow-deep">
       <article
         class="contact"
         data-aos="fade-up"
@@ -215,7 +215,7 @@
   <Footer></Footer>
 </template>
 
-<style lang="scss">
+<style lang="scss" scope>
 .banner {
   position: relative;
   .swiper-pagination {
@@ -560,7 +560,6 @@
 }
 
 .information {
-  background-color: #9e805a;
   width: 100%;
   color: #fff;
   padding: 20px;
