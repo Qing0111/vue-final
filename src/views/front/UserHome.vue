@@ -215,7 +215,7 @@
   <Footer></Footer>
 </template>
 
-<style lang="scss" scope>
+<style lang="scss">
 .banner {
   position: relative;
   .swiper-pagination {

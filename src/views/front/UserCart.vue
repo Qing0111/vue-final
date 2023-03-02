@@ -177,7 +177,7 @@
   <DelModal ref="delModal" @del-item="delAllCart"></DelModal>
 </template>
 
-<style lang="scss" scope>
+<style lang="scss">
 .user-cart {
   padding: 60px 20px;
   min-height: calc(100vh - 158px);

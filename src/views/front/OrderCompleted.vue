@@ -83,7 +83,7 @@
   </main>
 </template>
 
-<style lang="scss" scope>
+<style lang="scss">
 .order-completed {
   padding: 60px 20px;
   min-height: calc(100vh - 158px);

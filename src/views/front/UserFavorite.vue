@@ -10,7 +10,7 @@
     </div>
   </Loading>
   <main class="container-md">
-    <transition name="switch" mode="out-in" >
+    <transition name="switch" mode="out-in">
       <section class="favorite" v-if="favoriteProduct.length">
         <nav aria-label="breadcrumb tabs">
           <ol class="breadcrumb">
@@ -80,7 +80,7 @@
   <DelModal ref="delModal" @del-item="clearLocal"></DelModal>
 </template>
 
-<style lang="scss" scope>
+<style lang="scss">
 .favorite {
   padding: 60px 20px;
   min-height: calc(100vh - 158px);

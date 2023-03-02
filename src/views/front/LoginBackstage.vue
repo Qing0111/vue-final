@@ -48,7 +48,7 @@
   </main>
 </template>
 
-<style lang="scss" scope>
+<style lang="scss">
 .login {
   height: calc(100vh - 158px);
   display: flex;
