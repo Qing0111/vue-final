@@ -86,7 +86,6 @@
 .product-list {
   width: 100%;
   overflow-x: auto;
-  // -webkit-overflow-scrolling: touch;
   .table {
     min-width: 760px;
   }
@@ -131,9 +130,6 @@ export default {
     ProductModal,
     DelModal,
     Pagination,
-  },
-  computed: {
-    // ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
   methods: {
     ...mapActions(statusStore, ["pushMessage"]),

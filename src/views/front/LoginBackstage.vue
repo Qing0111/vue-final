@@ -77,24 +77,8 @@ export default {
   },
   methods: {
     signIn() {
-      // console.log("login");
       this.isLoading = true;
       const api = `${process.env.VUE_APP_API}/admin/signin`;
-      // fetch(api, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(this.user),
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) => {
-      //     if (res.success) {
-      //       const { token, expired } = res;
-      //       // console.log(token, expired);
-      //       document.cookie = `hexToken=${token}; expired=${new Date(expired)}`;
-      //       console.log(res);
-      //       this.$router.push("/dashboard/products");
-      //     }
-      //   });
 
       this.$http.post(api, this.user).then((res) => {
         this.isLoading = false;

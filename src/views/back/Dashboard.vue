@@ -1,8 +1,5 @@
 <template>
   <NavbarBack></NavbarBack>
-  <div class="container-fluid position-relative">
-    <!-- <ToastMessages></ToastMessages> -->
-  </div>
   <router-view />
 </template>
 
@@ -20,13 +17,11 @@
 
 <script>
 import emitter from "@/methods/emitter";
-// import ToastMessages from "@/components/ToastMessages.vue";
 import NavbarBack from "../../components/NavbarBack.vue";
 
 export default {
   components: {
     NavbarBack,
-    // ToastMessages,
   },
   provide() {
     return {
@@ -38,22 +33,6 @@ export default {
       /(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
-    // console.log(this.user);
-    // const api = `${process.env.VUE_APP_API}/api/user/check`;
-    // fetch(api, {
-    //   method: "POST",
-    //   headers: {
-    //     "Authorization": token,
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(this.user),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     if (!res.success) {
-    //       this.$router.push("/login");
-    //     }
-    //   });
 
     this.$http.defaults.headers.common.Authorization = token;
     const api = `${process.env.VUE_APP_API}/api/user/check`;

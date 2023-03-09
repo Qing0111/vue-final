@@ -89,13 +89,9 @@
 <style lang="scss">
 .order {
   width: 100%;
-  // overflow-y: hidden;
   overflow-x: auto;
-  // -webkit-overflow-scrolling: touch;
   .table {
     min-width: 800px;
-    // margin-bottom: 0;
-    // max-width: none;
   }
   &::-webkit-scrollbar {
     width: 10px;
@@ -137,9 +133,6 @@ export default {
     Pagination,
     DelModal,
     OrderModal,
-  },
-  computed: {
-    // ...mapState(statusStore, ["isLoading", "cartLoading"]),
   },
   methods: {
     ...mapActions(statusStore, ["pushMessage"]),
@@ -190,7 +183,6 @@ export default {
   },
   created() {
     this.getOrders();
-    // console.log(process.env.VUE_APP_API);
   },
 };
 </script>

@@ -43,9 +43,6 @@ export default defineStore("statusStore", {
           title: `${title}失敗`,
         });
       }
-      // setTimeout(() => {
-      //   this.messages.shift();
-      // }, 1600);
     },
   },
 });

@@ -182,7 +182,6 @@
   padding: 60px 20px;
   min-height: calc(100vh - 158px);
   table {
-    // border: 1px solid #54433c;
     thead {
       display: none;
       tr {
@@ -297,10 +296,6 @@ export default {
   data() {
     return {
       product: {},
-      // status: {
-      //   loadingItem: "",
-      // },
-      // isLoading: false,
       coupon_code: "",
       form: {
         user: {

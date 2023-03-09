@@ -10,9 +10,6 @@ export default defineStore("productStore", {
       products: [],
     };
   },
-  getters: {
-    // sortProducts: (state) => state.products.sort((a, b) => a.price - b.price),
-  },
   actions: {
     getProducts() {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;

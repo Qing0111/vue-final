@@ -244,7 +244,6 @@
       cursor: pointer;
       border: 1px solid #c8a472;
       padding: 6px;
-      // border-radius: 4px;
       color: #c8a472;
       &:hover,
       &.active {
@@ -448,10 +447,8 @@ export default {
 
     getProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
-      // this.isLoading = true;
       this.$http.get(api).then((response) => {
         // console.log(response.data);
-        // this.isLoading = false;
         if (response.data.success) {
           this.product = response.data.product;
         }
@@ -477,7 +474,6 @@ export default {
   },
   created() {
     this.id = this.$route.params.product;
-    // console.log(this.$route);
     this.getProduct();
     this.getProducts();
   },

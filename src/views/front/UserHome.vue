@@ -248,9 +248,6 @@
       text-decoration: none;
       border-radius: 0px;
       padding: 4px 20px;
-      // &:hover {
-      //   color: white;
-      // }
     }
   }
 }
@@ -282,7 +279,6 @@
   top: -36px;
   z-index: 3;
   background-color: #fff;
-  // box-shadow: 1px -1px 3px #ccc;
   .product-commodity {
     margin-bottom: 40px;
     a {
@@ -493,7 +489,6 @@
   .swiper-button-prev,
   .swiper-button-next {
     &::after {
-      // color: rgba(84, 67, 60, 0.6);
       color: rgb(233, 191, 132, 0.7);
       background-color: rgba(0, 0, 0, 0.3);
       padding: 12px;
@@ -508,7 +503,6 @@
     top: -36px;
     z-index: 3;
     background-color: #fff;
-    // box-shadow: 1px -1px 3px #ccc;
     .product-commodity {
       display: flex;
       gap: 20px;

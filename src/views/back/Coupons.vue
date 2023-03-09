@@ -75,7 +75,6 @@
 .coupons {
   width: 100%;
   overflow-x: auto;
-  // -webkit-overflow-scrolling: touch;
   .table {
     min-width: 500px;
   }

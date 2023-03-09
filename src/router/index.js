@@ -43,7 +43,7 @@ const routes = [
         meta: { title: "填寫資料 | RabbitFamily" },
       },
       {
-        path: "checkout/:orderId",
+        path: "material/:orderId",
         name: "check",
         component: () => import("../views/front/UserCheckout.vue"),
         meta: { title: "確認訂單 | RabbitFamily" },
@@ -102,7 +102,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // console.log(to);
   if (to.params.product) {
     document.title = `${to.query.name} | ${to.meta.title}`;
   } else if (to.meta.title) {

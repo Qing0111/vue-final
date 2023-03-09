@@ -88,11 +88,6 @@
   padding: 60px 20px;
   min-height: calc(100vh - 158px);
   .finish {
-    // margin-top: 120px;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
     form {
       .table {
         margin-bottom: 28px;

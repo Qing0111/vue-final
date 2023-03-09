@@ -76,12 +76,6 @@
                     @click="addToCart(item.id)"
                     :disabled="cartLoading == item.id"
                   >
-                    <!-- <span
-                      class="spinner-grow spinner-grow-sm text-white"
-                      role="status"
-                      v-if="cartLoading == item.id"
-                    >
-                    </span> -->
                     <i class="bi bi-cart3"></i>
                   </div>
                   <div
@@ -137,7 +131,6 @@
           background-color: #dfcaac;
           color: #fff;
           border: 1px solid #dfcaac;
-          // border-radius: 50px;
           box-shadow: none;
         }
         &.active {
@@ -145,7 +138,6 @@
           border: 1px solid #c8a472;
           color: #fff;
           box-shadow: none;
-          // border-radius: 50px;
         }
       }
     }
@@ -237,31 +229,12 @@
         position: sticky;
         top: 106px;
         left: 0;
-        // border: 1px solid #c8a472;
-        // box-shadow: 1px 1px 1px #927853;
         display: block;
         border-radius: 4px;
-        // overflow: hidden;
       }
       li {
-        // border-bottom: 1px solid #c8a472;
         margin-bottom: 8px;
         text-align: center;
-        // &:last-child {
-        //   border-bottom: 0;
-        // }
-        // a {
-        //   border: 0;
-        //   box-shadow: none;
-        //   border-radius: 0px;
-        //   padding: 12px;
-
-        //   &.active,
-        //   &:hover {
-        //     border: none;
-        //     border-radius: 0px;
-        //   }
-        // }
       }
     }
     .products {
@@ -289,7 +262,6 @@
 
 <script>
 import emitter from "@/methods/emitter";
-// import ToastMessages from "@/components/ToastMessages.vue";
 import { mapState, mapActions } from "pinia";
 import productStore from "@/stores/productStore";
 import cartStore from "@/stores/cartStore";
@@ -302,7 +274,6 @@ import "aos/dist/aos.css";
 
 export default {
   components: {
-    // ToastMessages,
     Pagination,
   },
   mixins: [localFavorite],

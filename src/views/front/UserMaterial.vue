@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <Loading :active="isLoading">
     <div class="loadingio-spinner-double-ring-juf8237g2sc">
@@ -171,11 +170,9 @@
   padding: 60px 20px;
   min-height: calc(100vh - 158px);
   table {
-    // border: 1px solid #54433c;
     thead {
       tr {
         border-bottom: 2px solid #54433c;
-        // border-bottom: 1px solid #54433c;
       }
     }
     tbody {
@@ -193,7 +190,6 @@
     input,
     textarea {
       box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.4) inset;
-      // border-radius: 8px;
     }
   }
 }
@@ -236,7 +232,7 @@ export default {
       this.$http.post(url, { data: order }).then((res) => {
         console.log(res.data.orderId);
         this.getCart();
-        this.$router.push(`/checkout/${res.data.orderId}`);
+        this.$router.push(`/material/${res.data.orderId}`);
       });
     },
   },
