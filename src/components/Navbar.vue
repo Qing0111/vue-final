@@ -119,7 +119,7 @@ header {
       z-index: 2;
       visibility: hidden;
       opacity: 0;
-      transition: all 0.3s;
+      transition: opacity 0.3s ease-in;
       &.active {
         visibility: visible;
         opacity: 1;
