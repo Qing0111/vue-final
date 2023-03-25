@@ -81,7 +81,7 @@ export default {
       //     }
       //   });
       this.isLoading = true;
-      this.$http.post(api, this.user).then((res) => {
+      this.$http.post(api).then((res) => {
         this.isLoading = false;
         console.log(res);
         if (res.data.success) {

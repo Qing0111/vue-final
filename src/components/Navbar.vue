@@ -4,27 +4,18 @@
       <p>輸入優惠碼 : 52rabbit，可享有8折優惠!</p>
     </section>
     <section class="header">
-      <div class="burger" @click="toggleBurger">
-        <i class="bi bi-list-nested" ref="burger"></i>
-        <i class="bi bi-x-lg" ref="cross"></i>
+      <div class="burger" ref="burger" @click="toggleBurger">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
       <nav ref="nav">
         <ul>
           <li>
-            <router-link
-              to="/"
-              @click="removeBurger"
-
-              >首頁</router-link
-            >
+            <router-link to="/">首頁</router-link>
           </li>
           <li>
-            <router-link
-              to="/products?category=全部"
-              @click="removeBurger"
-
-              >商品</router-link
-            >
+            <router-link to="/products?category=全部">商品</router-link>
           </li>
         </ul>
       </nav>
@@ -34,14 +25,10 @@
       </div>
       <ul class="collect-shop">
         <li>
-          <router-link to="/login"
-            ><i class="bi bi-person"></i
-          ></router-link>
+          <router-link to="/login"><i class="bi bi-person"></i></router-link>
         </li>
         <li class="itemLength">
-          <router-link
-            to="/favorite"
-            
+          <router-link to="/favorite"
             ><i class="bi bi-suit-heart"></i
           ></router-link>
           <article class="text-white" v-if="favoriteItems.length">
@@ -49,7 +36,9 @@
           </article>
         </li>
         <li class="itemLength">
-          <router-link to="/cart" :class="{ active: this.$route.path == '/cart' }"
+          <router-link
+            to="/cart"
+            :class="{ active: this.$route.path == '/cart' }"
             ><i class="bi bi-cart3"></i
           ></router-link>
           <article class="text-white" v-if="cart.total">
@@ -94,18 +83,32 @@ header {
     align-items: center;
     position: relative;
     .burger {
-      i {
-        font-size: 28px;
-        color: #fff;
-      }
-      .bi-list-nested.none {
-        display: none;
-      }
-      .bi-x-lg {
-        display: none;
-      }
-      .bi-x-lg.block {
+      cursor: pointer;
+      span {
         display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #fff;
+        margin-bottom: 5px;
+        transition: all ease-in 0.3s;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      &.open {
+        transform: translateX(3px);
+        span {
+          &:first-child {
+            transform: rotate(45deg) translateY(10px);
+          }
+          &:nth-child(2) {
+            width: 0;
+            opacity: 0;
+          }
+          &:last-child {
+            transform: rotate(-45deg) translateY(-10px);
+          }
+        }
       }
     }
     nav {
@@ -116,7 +119,7 @@ header {
       z-index: 2;
       visibility: hidden;
       opacity: 0;
-      transition: opacity 0.5s;
+      transition: all 0.3s;
       &.active {
         visibility: visible;
         opacity: 1;
@@ -225,16 +228,13 @@ header {
       align-items: center;
       .burger {
         display: none;
-        i {
-          font-size: 32px;
-          color: #fff;
-        }
       }
       nav {
         width: auto;
         opacity: 1;
         position: static;
         visibility: visible;
+        margin-left: -12px;
         ul {
           // height: 100%;
           display: flex;
@@ -296,13 +296,7 @@ export default {
 
     toggleBurger() {
       this.$refs.nav.classList.toggle("active");
-      this.$refs.burger.classList.toggle("none");
-      this.$refs.cross.classList.toggle("block");
-    },
-    removeBurger() {
-      this.$refs.nav.classList.remove("active");
-      this.$refs.burger.classList.remove("none");
-      this.$refs.cross.classList.remove("block");
+      this.$refs.burger.classList.toggle("open");
     },
   },
   created() {
