@@ -49,7 +49,10 @@
             data-aos-duration="800"
             data-aos-offset="0"
           >
-            <article class="card product-card">
+            <article
+              class=""
+              :class="['card', 'product-card', { skeleton: isLoadSkeleton }]"
+            >
               <router-link
                 :to="{
                   name: 'product',
@@ -63,12 +66,14 @@
               </router-link>
 
               <div class="card-body">
-                <h5 class="card-title fs-5">{{ item.title }}</h5>
+                <h5 class="card-title fs-5">
+                  {{ isLoadSkeleton ? "" : item.title }}
+                </h5>
                 <p class="card-text" v-if="!item.price">
-                  {{ item.origin_price }} 元
+                  {{ isLoadSkeleton ? "" : item.origin_price }} 元
                 </p>
                 <p class="card-text" v-if="item.price">
-                  NT$ {{ item.origin_price }}
+                  NT$ {{ isLoadSkeleton ? "" : item.origin_price }}
                 </p>
                 <div class="group">
                   <div
@@ -176,41 +181,80 @@
           vertical-align: bottom;
         }
       }
-    }
-    .group {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-top: 4px;
-      gap: 8px;
-    }
-    .shop {
-      cursor: pointer;
-      border: 1px solid #c8a472;
-      padding: 6px;
-      border-radius: 50%;
-      color: #c8a472;
-      &:hover {
-        background-color: #c8a472;
-        color: #fff;
+
+      .group {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 4px;
+        gap: 8px;
       }
-      i {
-        font-size: 20px;
+      .shop {
+        cursor: pointer;
+        border: 1px solid #c8a472;
+        padding: 6px;
+        border-radius: 50%;
+        color: #c8a472;
+        &:hover {
+          background-color: #c8a472;
+          color: #fff;
+        }
+        i {
+          font-size: 20px;
+        }
+      }
+      .heart {
+        cursor: pointer;
+        border: 1px solid #c8a472;
+        padding: 6px;
+        border-radius: 50%;
+        color: #c8a472;
+        &:hover,
+        &.active {
+          background-color: #c8a472;
+          color: #fff;
+        }
+        i {
+          font-size: 20px;
+        }
       }
     }
-    .heart {
-      cursor: pointer;
-      border: 1px solid #c8a472;
-      padding: 6px;
-      border-radius: 50%;
-      color: #c8a472;
-      &:hover,
-      &.active {
-        background-color: #c8a472;
-        color: #fff;
+    .skeleton {
+      .pic {
+        height: 240px;
+        background-color: #ccc;
+        &::after {
+          content: "";
+          width: 0;
+          height: 0;
+        }
+        img {
+          width: 0;
+          height: 0;
+        }
       }
-      i {
-        font-size: 20px;
+      .card-body {
+        h5 {
+          width: 100%;
+          height: 20px;
+          background-color: #ccc;
+        }
+        p {
+          color: #ccc;
+          width: 100%;
+          height: 16px;
+          background-color: #ccc;
+        }
+        .shop {
+          border: 1px solid #ccc;
+          background-color: #ccc;
+          color: #ccc;
+        }
+        .heart {
+          border: 1px solid #ccc;
+          color: #ccc;
+          background-color: #ccc;
+        }
       }
     }
   }
@@ -253,6 +297,11 @@
         &:hover .pic::after {
           content: "see more";
           clip-path: circle(50px at center);
+        }
+      }
+      .skeleton {
+        .pic {
+          height: 300px;
         }
       }
     }
@@ -311,7 +360,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(productStore, ["products"]),
+    ...mapState(productStore, ["products", "isLoadSkeleton"]),
     ...mapState(statusStore, ["isLoading", "cartLoading"]),
 
     filterData() {
@@ -337,7 +386,7 @@ export default {
   methods: {
     ...mapActions(productStore, ["getProducts"]),
     ...mapActions(cartStore, ["addToCart", "getCart"]),
-    
+
     category(category) {
       this.$router.push({ name: "products", query: { category: category } });
       this.tabState = category;
